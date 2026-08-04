@@ -1,0 +1,30 @@
+{
+  "name": "projekt-agila-metoder-startkod",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "mock-server": "json-server --watch server/products.json --middlewares server/middleware.js --port 4000",
+    "dev:full": "concurrently \"npm run dev\" \"npm run mock-server\"",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "next": "16.2.10",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "concurrently": "^9.2.1",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.10",
+    "json-server": "^0.17.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

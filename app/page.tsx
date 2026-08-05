@@ -9,9 +9,17 @@ export default async function Home() {
   const products = await ProductService.getProducts();
 
   return (
-    <main>
-      <div className="mt-5">
-        <ProductListComponent products={products} />
+    <main className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-6">
+        {/*Header Component */}
+
+        {/*Inventory statics contianer*/}
+
+        {/*Inventory statics contianer*/}
+
+        <div className="mt-5">
+          <ProductListComponent products={products} />
+        </div>
       </div>
     </main>
   );

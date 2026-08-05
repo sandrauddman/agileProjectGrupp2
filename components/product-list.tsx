@@ -6,9 +6,15 @@ import ProductPagination from "./product-pagination";
 
 type Props = {
   products: Product[];
+  currentPage: number;
+  totalPage: number;
 };
 
-export default function ProductList({ products }: Props) {
+export default function ProductList({
+  products,
+  currentPage,
+  totalPage,
+}: Props) {
   return (
     <div className="mt-6 rounded-xl border border-gray-200 bg-whit">
       <table className="w-full">
@@ -85,7 +91,7 @@ export default function ProductList({ products }: Props) {
           ))}
         </tbody>
       </table>
-      <ProductPagination />
+      <ProductPagination currentPage={currentPage} totalPages={totalPage} />
     </div>
   );
 }

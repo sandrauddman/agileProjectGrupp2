@@ -103,3 +103,19 @@ To learn more about Next.js, take a look at the following resources:
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
+
+## DOD -definition of done
+
+• funktionen är testad av alla i gruppen
+• acceptanskriterierna är uppfyllda
+• koden är färdig och begriplig
+• TypeScript kompilerar utan fel
+• ESLint har inga relevanta fel
+• den fungerar tillsammans med resten av appen
+• den är mergad till gruppens gemensamma dev branch
+• inga kända allvarliga fel återstår
+• GitHub-issuet är uppdaterat
+
+
+
+

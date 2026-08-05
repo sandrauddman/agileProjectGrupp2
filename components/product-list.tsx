@@ -2,6 +2,8 @@ import type { Product } from "@/app/types";
 import { Trash2, Pencil } from "lucide-react";
 import Link from "next/link";
 
+import ProductPagination from "./product-pagination";
+
 type Props = {
   products: Product[];
 };
@@ -83,6 +85,7 @@ export default function ProductList({ products }: Props) {
           ))}
         </tbody>
       </table>
+      <ProductPagination />
     </div>
   );
 }

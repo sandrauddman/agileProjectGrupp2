@@ -10,16 +10,16 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="container max-w-7xl mx-auto px-6">
         {/*Header Component */}
 
         {/*Inventory statics contianer*/}
 
         {/*Inventory statics contianer*/}
 
-        <div className="mt-5">
+        <section className="mt-5">
           <ProductListComponent products={products} />
-        </div>
+        </section>
       </div>
     </main>
   );

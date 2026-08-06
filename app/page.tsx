@@ -4,6 +4,8 @@ import ProductService from '@/services/product-service';
 //Components
 import ProductListComponent from '@/components/product-list';
 
+import InventoryStatistics from '@/components/inventory-statistics';
+
 type PageProps = {
   searchParams: Promise<{
     page?: string;
@@ -25,7 +27,7 @@ export default async function Home({ searchParams }: PageProps) {
       <div className="container max-w-7xl mx-auto px-6">
         {/*Header Component */}
 
-        {/*Inventory statics Component*/}
+        <InventoryStatistics />
 
         {/*SEARCH  Component*/}
 

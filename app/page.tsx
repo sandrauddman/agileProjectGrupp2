@@ -3,7 +3,7 @@ import ProductService from '@/services/product-service';
 
 //Components
 import ProductListComponent from '@/components/product-list';
-
+import Header from '@/components/header';
 import InventoryStatistics from '@/components/inventory-statistics';
 
 type PageProps = {
@@ -24,8 +24,10 @@ export default async function Home({ searchParams }: PageProps) {
 
   return (
     <main className="min-h-screen bg-gray-50">
+
+      <Header />
+
       <div className="container max-w-7xl mx-auto px-6">
-        {/*Header Component */}
 
         <InventoryStatistics />
 

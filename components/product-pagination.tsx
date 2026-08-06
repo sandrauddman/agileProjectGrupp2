@@ -22,22 +22,31 @@ export default function ProductPagination({ currentPage, totalPages }: Props) {
         <button className="flex h-10 w-10 items-center justify-center rounded-md bg-gray-700 text-white font-medium">
           {currentPage}
         </button>
-        <Link
-          href={`/?page=${currentPage + 1}`}
-          className="flex h-10 w-10 items-center justify-center rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-100"
-        >
-          {currentPage + 1}
-        </Link>
-        <Link
-          href={`/?page=${currentPage + 2}`}
-          className="flex h-10 w-10 items-center justify-center rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-100"
-        >
-          {currentPage + 2}
-        </Link>
-        <span className="px-2 text-gray-500">...</span>
-        <button className="flex h-10 w-10 items-center justify-center rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-100">
-          {totalPages}
-        </button>
+        {currentPage + 1 <= totalPages && (
+          <Link
+            href={`/?page=${currentPage + 1}`}
+            className="flex h-10 w-10 items-center justify-center rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-100"
+          >
+            {currentPage + 1}
+          </Link>
+        )}
+
+        {currentPage + 2 <= totalPages && (
+          <Link
+            href={`/?page=${currentPage + 2}`}
+            className="flex h-10 w-10 items-center justify-center rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-100"
+          >
+            {currentPage + 2}
+          </Link>
+        )}
+        {currentPage + 1 <= totalPages && (
+          <Link
+            href={`/?page=${totalPages}`}
+            className="flex h-10 w-10 items-center justify-center rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-100"
+          >
+            {totalPages}
+          </Link>
+        )}
         <Link
           href={`/?page=${currentPage + 1}`}
           className="flex h-10 w-10 items-center justify-center rounded-md border border-gray-300 bg-white text-gray-600 hover:bg-gray-100"

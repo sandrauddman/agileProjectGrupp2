@@ -1,26 +1,42 @@
-import SearchForm from "@/components/search-form";
-import type { ProductsResponse } from "./types";
+//Services
+import ProductService from '@/services/product-service';
 
-const API_URL = "http://localhost:4000";
-const defaultLimit = "6";
+//Components
+import ProductListComponent from '@/components/product-list';
 
-export default async function Home() {
-  // we use the fetch() method to get the products from the API
-  // in this fetch we sort using _sort and _order and we limit the number of products using _limit
-  // we also use _expand to get the relational category data
-  // we can use the other destructed variables like page, total and so on to create pagination or show info
-  const { products, total, page, pages, limit }: ProductsResponse = await fetch(
-    `${API_URL}/products/?_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category`,
-  ).then((res) => res.json());
+type PageProps = {
+  searchParams: Promise<{
+    page?: string;
+  }>;
+};
 
+export default async function Home({ searchParams }: PageProps) {
+  const params = await searchParams;
 
-console.log(products);
+  //Set default current page to 1 if params.page is undefined.
+  const currentPage = Number(params.page ?? '1');
+
+  //Call Product Service for API Call
+  const response = await ProductService.getProducts(currentPage);
+  const products = response.products;
 
   return (
-    <main>
-      <SearchForm/>
-      <h1>Products</h1>
-      <div>{products.map((product) => <h2 key={product.id}>{product.title} - {product.category?.name}</h2>)}</div>
+    <main className="min-h-screen bg-gray-50">
+      <div className="container max-w-7xl mx-auto px-6">
+        {/*Header Component */}
+
+        {/*Inventory statics Component*/}
+
+        {/*SEARCH  Component*/}
+
+        <section className="mt-5">
+          <ProductListComponent
+            products={products}
+            currentPage={response.page}
+            totalPage={response.pages}
+          />
+        </section>
+      </div>
     </main>
   );
 }

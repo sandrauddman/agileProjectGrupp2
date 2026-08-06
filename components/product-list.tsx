@@ -41,9 +41,8 @@ export default function ProductList({
                     height={50}
                     src={product.thumbnail}
                     alt={product.title}
-                    className="h-10 w-10 rounded-md border object-cover"
+                    className="h-10 w-10 rounded-md border border-gray-300 object-cover"
                   />
-
                   <div>
                     <p className="font-semibold text-gray-900">
                       {product.title}
@@ -52,11 +51,8 @@ export default function ProductList({
                   </div>
                 </div>
               </td>
-
               <td className="px-6 py-4 text-black">{product.brand}</td>
-
               <td className="px-6 py-4 text-black">{product.category?.name}</td>
-
               <td className="px-6 py-4">
                 {(product.stock ?? 0) > 10 ? (
                   <span className="font-medium text-green-600">

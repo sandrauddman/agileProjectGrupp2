@@ -28,7 +28,7 @@ const exampleCategories : Category[] =[
 
 
   return ( <>
-    <form action="submit" className="bg-white border-1 border-zinc-200 rounded-sm flex p-4 gap-4 m-10">
+    <form action="submit" className="bg-white border-1 border-zinc-200 rounded-sm flex p-4 gap-4 mt-5 text-sm">
         <input type="text" name="search" id="search" placeholder="Search products..." className="border-1 border-zinc-200 rounded-sm p-2 grow-7"/>
         <select name="category" id="category" defaultValue={"0"} className="border-1 border-zinc-200 rounded-sm p-2 grow-2">
             <option value="0" disabled >All Categories</option>
@@ -44,7 +44,7 @@ const exampleCategories : Category[] =[
             <option value="3">Low stock</option>
             <option value="4">Out of Stock</option>
         </select>
-        <button className="border-1 border-zinc-200 rounded-sm flex gap-2 p-2  justify-center"> <Funnel size={18} fill="black"/>Filter</button>
+        <button className="border-1 border-zinc-200 hover:bg-zinc-300 rounded-sm flex gap-2 p-2  justify-center"> <Funnel size={18} fill="black"/>Filter</button>
          
 
 

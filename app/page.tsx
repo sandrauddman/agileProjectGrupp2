@@ -5,7 +5,7 @@ import ProductService from '@/services/product-service';
 import ProductListComponent from '@/components/product-list';
 
 import InventoryStatistics from '@/components/inventory-statistics';
-
+import SearchForm from '@/components/search-form'; 
 type PageProps = {
   searchParams: Promise<{
     page?: string;
@@ -29,7 +29,7 @@ export default async function Home({ searchParams }: PageProps) {
 
         <InventoryStatistics />
 
-        {/*SEARCH  Component*/}
+        <SearchForm/>
 
         <section className="mt-5">
           <ProductListComponent

@@ -1,3 +1,4 @@
+import SearchForm from "@/components/search-form";
 import type { ProductsResponse } from "./types";
 
 const API_URL = "http://localhost:4000";
@@ -17,6 +18,7 @@ console.log(products);
 
   return (
     <main>
+      <SearchForm/>
       <h1>Products</h1>
       <div>{products.map((product) => <h2 key={product.id}>{product.title} - {product.category?.name}</h2>)}</div>
     </main>

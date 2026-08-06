@@ -8,7 +8,7 @@ export default function Header() {
                     <h1 className="text-xl font-extrabold text-foreground">
                         Inventory Management
                     </h1>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
                         Manage and track your global product catalogue across all categories
                     </p>
                 </div>

@@ -6,6 +6,7 @@ import ProductListComponent from '@/components/product-list';
 
 import InventoryStatistics from '@/components/inventory-statistics';
 import SearchForm from '@/components/search-form'; 
+
 type PageProps = {
   searchParams: Promise<{
     page?: string;

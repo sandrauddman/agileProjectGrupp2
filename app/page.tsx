@@ -27,7 +27,7 @@ export default async function Home({ searchParams }: PageProps) {
 
       <Header />
 
-      <div className="container max-w-7xl mx-auto px-6">
+      <div className="container max-w-7xl mx-auto px-6 py-6">
 
         <InventoryStatistics />
 

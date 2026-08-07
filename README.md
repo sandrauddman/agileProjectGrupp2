@@ -106,7 +106,7 @@ To learn more about Next.js, take a look at the following resources:
 
 ## DOD -definition of done
 
-• funktionen är testad av alla i gruppen
+• funktionen är testad av 2 i gruppen på relevant branch vi PR-review.
 • acceptanskriterierna är uppfyllda
 • koden är färdig och begriplig
 • TypeScript kompilerar utan fel

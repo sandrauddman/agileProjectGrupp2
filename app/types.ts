@@ -1,10 +1,3 @@
-export interface Category {
-  id: number;
-  name: string;
-  slug: string;
-  image: string;
-}
-
 export interface Product {
   id: number;
   title: string;
@@ -54,23 +47,22 @@ export interface ProductsResponse {
   pages: number;
 }
 
-export interface CategoryResponse {
+//Category API Responses
+export type ApiCategoryResponse = ApiCategorySuccessResponse | ApiCategoryErrorResponse;
+
+export interface Category {
   id: number;
-  image: string;
   name: string;
   slug: string;
+  image: string;
 }
 
-//Category API Responses
-export type ApiResponse<T> = ApiCategorySuccessResponse<T> | ApiCategoryErrorResponse;
-
-export interface ApiCategorySuccessResponse<T> {
+export interface ApiCategorySuccessResponse {
   success: true;
-  data: CategoryResponse;
-  message?: string;
+  categories: Category[];
 }
 
 export interface ApiCategoryErrorResponse {
-  success: boolean;
+  success: false;
   message: string;
 }

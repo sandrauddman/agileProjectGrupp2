@@ -1,5 +1,6 @@
 import { X } from "lucide-react";
 import ProductInfoForm from "./forms/product-info-form";
+import PricingInventoryForm from "./forms/pricing-inventory-form";
 
 type ProductModalProps = {
     mode: "add" | "edit";
@@ -38,6 +39,7 @@ export default function ProductModal({ mode, onClose }: ProductModalProps) {
 
                     {/* forms components here */}
                     <ProductInfoForm />
+                    <PricingInventoryForm />
 
                     <div className="flex justify-end gap-3">
                         <button

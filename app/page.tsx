@@ -1,11 +1,12 @@
 //Services
 import ProductService from '@/services/product-service';
+import CategoryService from '@/services/category-service';
 
 //Components
 import ProductListComponent from '@/components/product-list';
 import Header from '@/components/header';
 import InventoryStatistics from '@/components/inventory-statistics';
-import SearchForm from '@/components/search-form'; 
+import SearchForm from '@/components/search-form';
 
 type PageProps = {
   searchParams: Promise<{
@@ -23,17 +24,17 @@ export default async function Home({ searchParams }: PageProps) {
   const response = await ProductService.getProducts(currentPage);
   const products = response.products;
 
+  //Call Category Service for API CALL
+  const categoryResponse = await CategoryService.getAllCategories();
+  console.log(categoryResponse);
+
   return (
     <main className="min-h-screen bg-gray-50">
-
       <Header />
 
       <div className="container max-w-7xl mx-auto px-6 py-6">
-
         <InventoryStatistics />
-
-        <SearchForm/>
-
+        <SearchForm />
         <section className="mt-5">
           <ProductListComponent
             products={products}

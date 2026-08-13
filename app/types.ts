@@ -53,3 +53,24 @@ export interface ProductsResponse {
   page: number;
   pages: number;
 }
+
+export interface CategoryResponse {
+  id: number;
+  image: string;
+  name: string;
+  slug: string;
+}
+
+//Category API Responses
+export type ApiResponse<T> = ApiCategorySuccessResponse<T> | ApiCategoryErrorResponse;
+
+export interface ApiCategorySuccessResponse<T> {
+  success: true;
+  data: CategoryResponse;
+  message?: string;
+}
+
+export interface ApiCategoryErrorResponse {
+  success: boolean;
+  message: string;
+}

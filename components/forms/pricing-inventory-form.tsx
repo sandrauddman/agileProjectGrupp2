@@ -32,7 +32,7 @@ export default function PricingInventoryForm() {
                         id="discountPercentage"
                         name="discountPercentage"
                         type="number"
-                        step="0.01"
+                        step="1"
                         min="0"
                         max="100"
                         className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"

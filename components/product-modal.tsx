@@ -20,7 +20,7 @@ export default function ProductModal({ mode, onClose }: ProductModalProps) {
                 <button
                     type="button"
                     onClick={onClose}
-                    className="absolute right-4 top-4 text-foreground hover:text-foreground/50"
+                    className="absolute right-4 top-4 rounded-md p-2 text-foreground hover:bg-foreground/10"
                     aria-label="Close"
                 >
                     <X strokeWidth={3} size={20} />
@@ -45,7 +45,7 @@ export default function ProductModal({ mode, onClose }: ProductModalProps) {
                         <button
                             type="button"
                             onClick={onClose}
-                            className="rounded-lg border border-gray-300 px-4 py-2"
+                            className="rounded-lg border border-foreground/20 px-4 py-2 text-foreground hover:bg-foreground/10"
                         >
                             Cancel
                         </button>

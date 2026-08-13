@@ -34,7 +34,7 @@ export default function Header() {
 
             {/* Display product modal when open */}
             {isModalOpen && (
-                <ProductModal onClose={() => setIsModalOpen(false)} />
+                <ProductModal mode="add" onClose={() => setIsModalOpen(false)} />
             )}
         </div>
     );

@@ -1,10 +1,12 @@
 import { X } from "lucide-react";
 
 type ProductModalProps = {
+    mode: "add" | "edit";
     onClose: () => void;
 };
 
-export default function ProductModal({ onClose }: ProductModalProps) {
+export default function ProductModal({ mode, onClose }: ProductModalProps) {
+    const title = mode === "add" ? "Add Product" : "Edit Product";
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black/50">
             <section
@@ -27,15 +29,31 @@ export default function ProductModal({ onClose }: ProductModalProps) {
                         id="product-modal-title"
                         className="text-xl font-bold text-foreground"
                     >
-                        Product Modal
+                        {title}
                     </h2>
                 </header>
 
-                <div className="mt-6">
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                        Product forms
-                    </p>
-                </div>
+                <form className="mt-6 space-y-6">
+
+                    {/* forms components here */}
+
+                    <div className="flex justify-end gap-3">
+                        <button
+                            type="button"
+                            onClick={onClose}
+                            className="rounded-lg border border-gray-300 px-4 py-2"
+                        >
+                            Cancel
+                        </button>
+
+                        <button
+                            type="submit"
+                            className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white hover:bg-indigo-700"
+                        >
+                            Save Product
+                        </button>
+                    </div>
+                </form>
             </section>
         </div>
     );

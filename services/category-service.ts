@@ -1,30 +1,26 @@
-import {
-  ApiCategoryResponse,
-  ApiCategoryErrorResponse,
-  ApiCategorySuccessResponse,
-  Category,
-} from '@/app/types';
+import { ApiErrorResponse, ApiResponse, ApiSuccessResponse, CategoryResponse } from '@/app/types';
 
 const API_URL = 'http://localhost:4000';
 
 export default class CategoryService {
-  static async getAllCategories(): Promise<ApiCategoryResponse> {
+  static async getAllCategories(): Promise<ApiResponse<CategoryResponse>> {
     try {
       const response = await fetch(`${API_URL}/categories`, {
         method: 'GET',
       });
 
-      const result: Category[] = await response.json();
-
+      const result = await response.json();
       return {
         success: true,
-        categories: result,
-      } satisfies ApiCategorySuccessResponse;
+        data: {
+          categories: result,
+        },
+      } satisfies ApiSuccessResponse<CategoryResponse>;
     } catch (error) {
       return {
         success: false,
         message: 'Server fel vid hämtning av kategorier',
-      } satisfies ApiCategoryErrorResponse;
+      } satisfies ApiErrorResponse;
     }
   }
 }

@@ -7,7 +7,7 @@ import ProductListComponent from '@/components/product-list';
 import Header from '@/components/header';
 import InventoryStatistics from '@/components/inventory-statistics';
 import SearchForm from '@/components/search-form';
-import { Category } from './types';
+import { Category, Product } from './types';
 
 type PageProps = {
   searchParams: Promise<{
@@ -22,12 +22,12 @@ export default async function Home({ searchParams }: PageProps) {
   const currentPage = Number(params.page ?? '1');
 
   //Call Product Service for API Call
-  const response = await ProductService.getProducts(currentPage);
-  const products = response.products;
+  const productResponse = await ProductService.getProducts(currentPage);
+  const products: Product[] = productResponse.success ? productResponse.data.products : [];
 
   //Call Category Service for API CALL
   const categoryResponse = await CategoryService.getAllCategories();
-  const categories: Category[] = categoryResponse.success ? categoryResponse.categories : [];
+  const categories: Category[] = categoryResponse.success ? categoryResponse.data.categories : [];
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -39,8 +39,8 @@ export default async function Home({ searchParams }: PageProps) {
         <section className="mt-5">
           <ProductListComponent
             products={products}
-            currentPage={response.page}
-            totalPage={response.pages}
+            currentPage={productResponse.success ? productResponse.data.page : currentPage}
+            totalPage={productResponse.success ? productResponse.data.pages : 0}
           />
         </section>
       </div>

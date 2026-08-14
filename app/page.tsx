@@ -1,11 +1,13 @@
 //Services
 import ProductService from '@/services/product-service';
+import CategoryService from '@/services/category-service';
 
 //Components
 import ProductListComponent from '@/components/product-list';
 import Header from '@/components/header';
 import InventoryStatistics from '@/components/inventory-statistics';
-import SearchForm from '@/components/search-form'; 
+import SearchForm from '@/components/search-form';
+import { Category, Product } from './types';
 
 type PageProps = {
   searchParams: Promise<{
@@ -20,25 +22,25 @@ export default async function Home({ searchParams }: PageProps) {
   const currentPage = Number(params.page ?? '1');
 
   //Call Product Service for API Call
-  const response = await ProductService.getProducts(currentPage);
-  const products = response.products;
+  const productResponse = await ProductService.getProducts(currentPage);
+  const products: Product[] = productResponse.success ? productResponse.data.products : [];
+
+  //Call Category Service for API CALL
+  const categoryResponse = await CategoryService.getAllCategories();
+  const categories: Category[] = categoryResponse.success ? categoryResponse.data.categories : [];
 
   return (
     <main className="min-h-screen bg-gray-50">
-
-      <Header />
+      <Header categories={categories} />
 
       <div className="container max-w-7xl mx-auto px-6 py-6">
-
         <InventoryStatistics />
-
-        <SearchForm/>
-
+        <SearchForm categories={categories} />
         <section className="mt-5">
           <ProductListComponent
             products={products}
-            currentPage={response.page}
-            totalPage={response.pages}
+            currentPage={productResponse.success ? productResponse.data.page : currentPage}
+            totalPage={productResponse.success ? productResponse.data.pages : 0}
           />
         </section>
       </div>

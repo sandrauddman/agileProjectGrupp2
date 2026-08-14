@@ -1,14 +1,19 @@
-import { X } from "lucide-react";
 import ProductInfoForm from "./forms/product-info-form";
+import { Category } from '@/app/types';
+import { X } from 'lucide-react';
+
 import PricingInventoryForm from "./forms/pricing-inventory-form";
 
+import ProductMediaForm from "./forms/product-media-form";
 type ProductModalProps = {
-    mode: "add" | "edit";
+    mode: 'add' | 'edit';
     onClose: () => void;
+    categories: Category[];
 };
 
-export default function ProductModal({ mode, onClose }: ProductModalProps) {
-    const title = mode === "add" ? "Add Product" : "Edit Product";
+export default function ProductModal({ mode, onClose, categories }: ProductModalProps) {
+    console.log('Categories', categories);
+    const title = mode === 'add' ? 'Add Product' : 'Edit Product';
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black/50">
             <section
@@ -27,20 +32,16 @@ export default function ProductModal({ mode, onClose }: ProductModalProps) {
                 </button>
 
                 <header>
-                    <h2
-                        id="product-modal-title"
-                        className="text-xl font-bold text-foreground"
-                    >
+                    <h2 id="product-modal-title" className="text-xl font-bold text-foreground">
                         {title}
                     </h2>
                 </header>
 
                 <form className="mt-6 space-y-6">
-
                     {/* forms components here */}
+                    <ProductMediaForm />
                     <ProductInfoForm />
                     <PricingInventoryForm />
-
                     <div className="flex justify-end gap-3">
                         <button
                             type="button"

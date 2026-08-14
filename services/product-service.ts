@@ -1,15 +1,34 @@
-import type { ProductsResponse } from "@/app/types";
+import type {
+  ApiErrorResponse,
+  ApiResponse,
+  ApiSuccessResponse,
+  ProductsResponse,
+} from '@/app/types';
 
-const API_URL = "http://localhost:4000";
-const defaultLimit = "6";
+const API_URL = 'http://localhost:4000';
+const defaultLimit = '6';
 
 export default class ProductService {
   //GET: Products
-  static async getProducts(currentPage: number) {
-    const response: ProductsResponse = await fetch(
-      `${API_URL}/products?_page=${currentPage}&_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category`,
-    ).then((res) => res.json());
+  static async getProducts(currentPage: number): Promise<ApiResponse<ProductsResponse>> {
+    try {
+      const response = await fetch(
+        `${API_URL}/products?_page=${currentPage}&_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category`,
+        {
+          method: 'GET',
+        },
+      );
 
-    return response;
+      const result = await response.json();
+      return {
+        success: true,
+        data: result,
+      } satisfies ApiSuccessResponse<ProductsResponse>;
+    } catch (error) {
+      return {
+        success: false,
+        message: 'Kunde inte ansluta till servern',
+      } satisfies ApiErrorResponse;
+    }
   }
 }

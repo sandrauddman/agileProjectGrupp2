@@ -37,9 +37,9 @@ export default function ProductModal({ mode, onClose, categories }: ProductModal
         </header>
 
         <form className="mt-6 space-y-6">
-          {/* forms components here */}
-             <ProductMediaForm/>
+          {/* forms components here */} 
            <ProductInfoForm />
+            <ProductMediaForm/>
           <div className="flex justify-end gap-3">
             <button
               type="button"

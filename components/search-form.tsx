@@ -1,57 +1,68 @@
-import { Funnel } from "lucide-react";
-import { Category } from "@/app/types";
+import { Funnel } from 'lucide-react';
+import { Category } from '@/app/types';
 
-export default function SearchForm() {
+type Props = {
+  categories: Category[];
+};
 
-
-  const exampleCategories: Category[] = [
-
-    {
-      id: 1,
-      name: "Shoes",
-      slug: "shoes",
-      image: "img",
-    },
-    {
-      id: 2,
-      name: "Sunglasses",
-      slug: "sunglasses",
-      image: "img",
-    },
-    {
-      id: 3,
-      name: "Watches",
-      slug: "shoes",
-      image: "img",
-    }]
-
-
-
+export default function SearchForm({ categories }: Props) {
   return (
-    <form action="submit" className="bg-white border-1 border-zinc-200 rounded-sm flex p-4 gap-4 mt-6 text-sm">
+    <form
+      action="submit"
+      className="bg-white border-1 border-zinc-200 rounded-sm flex p-4 gap-4 mt-6 text-sm"
+    >
+      <label htmlFor="search" hidden>
+        Search
+      </label>
+      <input
+        type="text"
+        name="search"
+        id="search"
+        placeholder="Search products..."
+        className="border-1 border-zinc-200 rounded-sm p-2 grow-7"
+      />
 
-      <label htmlFor="search" hidden>Search</label>
-      <input type="text" name="search" id="search" placeholder="Search products..." className="border-1 border-zinc-200 rounded-sm p-2 grow-7" />
-
-      <label htmlFor="category" hidden>Select Category</label>
-      <select name="category" id="category" defaultValue={"0"} className="border-1 border-zinc-200 rounded-sm p-2 grow-2">
-        <option value="0" disabled >All Categories</option>
-        {exampleCategories.map((category) => (
-          <option value={category.id} key={category.id}>{category.name}</option>
-
+      <label htmlFor="category" hidden>
+        Select Category
+      </label>
+      <select
+        name="category"
+        id="category"
+        defaultValue={'0'}
+        className="border-1 border-zinc-200 rounded-sm p-2 grow-2"
+      >
+        <option value="0" disabled>
+          All Categories
+        </option>
+        {categories.map((category) => (
+          <option value={category.id} key={category.id}>
+            {category.name}
+          </option>
         ))}
       </select>
 
-      <label htmlFor="stock" hidden>Select Stock amount</label>
-      <select name="stock" id="stock" defaultValue={"0"} className="border-1 border-zinc-200 rounded-sm p-2 grow-2" >
-        <option value="0" disabled  >All Stock</option>
+      <label htmlFor="stock" hidden>
+        Select Stock amount
+      </label>
+      <select
+        name="stock"
+        id="stock"
+        defaultValue={'0'}
+        className="border-1 border-zinc-200 rounded-sm p-2 grow-2"
+      >
+        <option value="0" disabled>
+          All Stock
+        </option>
         <option value="2">In stock</option>
         <option value="3">Low stock</option>
         <option value="4">Out of Stock</option>
       </select>
 
-      <button className="border-1 border-zinc-200 hover:bg-zinc-300 rounded-sm flex gap-2 p-2  justify-center"> <Funnel size={18} fill="black" />Filter</button>
-
+      <button className="border-1 border-zinc-200 hover:bg-zinc-300 rounded-sm flex gap-2 p-2  justify-center">
+        {' '}
+        <Funnel size={18} fill="black" />
+        Filter
+      </button>
     </form>
   );
 }

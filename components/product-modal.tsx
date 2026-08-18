@@ -1,10 +1,9 @@
-import ProductInfoForm from "./forms/product-info-form";
+import ProductInfoForm from './forms/product-info-form';
 import { Category } from '@/app/types';
 import { X } from 'lucide-react';
 
 import PricingInventoryForm from "./forms/pricing-inventory-form";
-
-import ProductMediaForm from "./forms/product-media-form";
+import ProductMediaForm from './forms/product-media-form';
 type ProductModalProps = {
     mode: 'add' | 'edit';
     onClose: () => void;
@@ -39,9 +38,9 @@ export default function ProductModal({ mode, onClose, categories }: ProductModal
 
                 <form className="mt-6 space-y-6">
                     {/* forms components here */}
-                    <ProductInfoForm />
-                    <PricingInventoryForm />
                     <ProductMediaForm />
+                    <PricingInventoryForm />
+                    <ProductInfoForm categories={categories} />
                     <div className="flex justify-end gap-3">
                         <button
                             type="button"

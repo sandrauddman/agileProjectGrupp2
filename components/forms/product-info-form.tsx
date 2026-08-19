@@ -7,8 +7,8 @@ type Props = {
 export default function ProductInfoForm({ categories }: Props) {
   return (
     <section>
-      <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-        <div className="col-span-1 md:col-span-2">
+      <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="col-span-1 md:col-span-3">
           <label htmlFor="title" className="block text-sm font-medium text-foreground">
             Title
           </label>
@@ -21,7 +21,7 @@ export default function ProductInfoForm({ categories }: Props) {
           />
         </div>
 
-        <div className="col-span-1 md:col-span-2">
+        <div className="col-span-1 md:col-span-3">
           <label htmlFor="description" className="block text-sm font-medium text-foreground">
             Description
           </label>
@@ -60,16 +60,22 @@ export default function ProductInfoForm({ categories }: Props) {
             className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
           />
         </div>
+
         <div>
+          <label htmlFor="category" className="block text-sm font-medium text-foreground">
+            Category
+          </label>
+
           <select
             name="category"
             id="category"
-            defaultValue={'0'}
-            className="border-1 border-zinc-200 rounded-sm p-2 grow-2"
+            defaultValue="0"
+            className="mt-1 w-full rounded-lg border border-gray-300 bg-background px-3 py-2 text-foreground"
           >
             <option value="0" disabled>
-              Select Categories
+              Select Category
             </option>
+
             {categories.map((category) => (
               <option value={category.id} key={category.id}>
                 {category.name}

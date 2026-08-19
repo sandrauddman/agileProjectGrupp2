@@ -11,7 +11,6 @@ type ProductModalProps = {
 };
 
 export default function ProductModal({ mode, onClose, categories }: ProductModalProps) {
-    console.log('Categories', categories);
     const title = mode === 'add' ? 'Add Product' : 'Edit Product';
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black/50">
@@ -19,7 +18,7 @@ export default function ProductModal({ mode, onClose, categories }: ProductModal
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="product-modal-title"
-                className="relative w-full max-w-4xl rounded-lg bg-background p-6 shadow-xl"
+                className="relative w-full max-w-4xl rounded-lg bg-background p-6 text-left shadow-xl"
             >
                 <button
                     type="button"

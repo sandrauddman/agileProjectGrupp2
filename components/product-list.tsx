@@ -8,9 +8,10 @@ type Props = {
   products: Product[];
   currentPage: number;
   totalPage: number;
+  categoryParam?: string;
 };
 
-export default function ProductList({ products, currentPage, totalPage }: Props) {
+export default function ProductList({ products, currentPage, totalPage, categoryParam }: Props) {
   return (
     <div className="mt-6 rounded-xl border border-gray-200 bg-whit">
       <table className="w-full">
@@ -29,13 +30,7 @@ export default function ProductList({ products, currentPage, totalPage }: Props)
             <tr key={product.id} className="border-b border-gray-100 hover:bg-gray-50">
               <td className="px-6 py-4 text-black font-bold">
                 <div className="flex items-center gap-3">
-                  <img
-                    width={50}
-                    height={50}
-                    src={product.thumbnail}
-                    alt={product.title}
-                    className="h-10 w-10 rounded-md border border-gray-300 object-cover"
-                  />
+                  <img width={50} height={50} src={product.thumbnail} alt={product.title} className="h-10 w-10 rounded-md border border-gray-300 object-cover" />
                   <div>
                     <p className="font-semibold text-gray-900">{product.title}</p>
                     <p className="text-xs text-gray-500">SKU: {product.sku}</p>
@@ -73,7 +68,7 @@ export default function ProductList({ products, currentPage, totalPage }: Props)
           ))}
         </tbody>
       </table>
-      <ProductPagination currentPage={currentPage} totalPages={totalPage} />
+      <ProductPagination currentPage={currentPage} totalPages={totalPage} categoryParam={categoryParam} />
     </div>
   );
 }

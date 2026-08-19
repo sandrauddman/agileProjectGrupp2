@@ -12,6 +12,7 @@ import { Category, Product } from './types';
 type PageProps = {
   searchParams: Promise<{
     page?: string;
+    category?: string;
   }>;
 };
 
@@ -21,8 +22,11 @@ export default async function Home({ searchParams }: PageProps) {
   //Set default current page to 1 if params.page is undefined.
   const currentPage = Number(params.page ?? '1');
 
+  //Filter on category with params
+  const categoryParams = params.category ?? '';
+
   //Call Product Service for API Call
-  const productResponse = await ProductService.getProducts(currentPage);
+  const productResponse = await ProductService.getProducts(currentPage, categoryParams);
   const products: Product[] = productResponse.success ? productResponse.data.products : [];
 
   //Call Category Service for API CALL
@@ -35,10 +39,11 @@ export default async function Home({ searchParams }: PageProps) {
 
       <div className="container max-w-7xl mx-auto px-6 py-6">
         <InventoryStatistics />
-        <SearchForm categories={categories} />
+        <SearchForm categories={categories} selectedCategory={categoryParams} />
         <section className="mt-5">
           <ProductListComponent
             products={products}
+            categoryParam={categoryParams}
             currentPage={productResponse.success ? productResponse.data.page : currentPage}
             totalPage={productResponse.success ? productResponse.data.pages : 0}
           />

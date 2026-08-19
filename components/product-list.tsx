@@ -9,6 +9,7 @@ type Props = {
   currentPage: number;
   totalPage: number;
   categoryParam?: string;
+  stockParam?: string;
 };
 
 export default function ProductList({ products, currentPage, totalPage, categoryParam }: Props) {

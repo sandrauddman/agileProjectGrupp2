@@ -24,7 +24,7 @@ export default function ProductModal({ mode, onClose, categories, product }: Pro
                 <button
                     type="button"
                     onClick={onClose}
-                    className="absolute right-4 top-4 rounded-md p-2 text-foreground hover:bg-foreground/10"
+                    className="absolute right-4 top-4 rounded-md p-2 text-foreground hover:bg-foreground/10 cursor-pointer"
                     aria-label="Close"
                 >
                     <X strokeWidth={3} size={20} />
@@ -45,14 +45,14 @@ export default function ProductModal({ mode, onClose, categories, product }: Pro
                         <button
                             type="button"
                             onClick={onClose}
-                            className="rounded-lg border border-foreground/20 px-4 py-2 text-foreground hover:bg-foreground/10"
+                            className="rounded-lg border border-foreground/20 px-4 py-2 text-foreground hover:bg-foreground/10 cursor-pointer"
                         >
                             Cancel
                         </button>
 
                         <button
                             type="submit"
-                            className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white hover:bg-indigo-700"
+                            className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white hover:bg-indigo-700 cursor-pointer"
                         >
                             Save Product
                         </button>

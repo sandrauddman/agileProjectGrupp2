@@ -35,9 +35,9 @@ export default function SearchForm({ categories, selectedCategory, selectedStock
         <option value="">
           All Stock
         </option>
-        <option value="inStock">In stock</option>
-        <option value="lowStock">Low stock</option>
-        <option value="outofStock">Out of Stock</option>
+        <option value="&stock_gte=10">In stock</option>
+        <option value="&stock_gte=1&stock_lte=10">Low stock</option>
+        <option value="&stock_lte=0">Out of Stock</option>
       </select>
 
       <button className="border-1 border-zinc-200 hover:bg-zinc-300 rounded-sm flex gap-2 p-2  justify-center">

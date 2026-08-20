@@ -1,8 +1,10 @@
 import type { Product } from '@/app/types';
-import { Trash2, Pencil } from 'lucide-react';
+import { Pencil } from 'lucide-react';
 import Link from 'next/link';
 
-import ProductPagination from './product-pagination';
+//Components
+import ProductPagination from '@/components/product-pagination';
+import DeleteProductButton from '@/components/delete-product-button';
 
 type Props = {
   products: Product[];
@@ -12,6 +14,11 @@ type Props = {
 };
 
 export default function ProductList({ products, currentPage, totalPage, categoryParam }: Props) {
+  const deleteProduct = async (productId: number) => {
+    'use server';
+    //Call API For product delete
+  };
+
   return (
     <div className="mt-6 rounded-xl border border-gray-200 bg-whit">
       <table className="w-full">
@@ -54,9 +61,7 @@ export default function ProductList({ products, currentPage, totalPage, category
               <td className="px-6 py-4 text-center text-black">
                 <div className="flex justify-center gap-4">
                   {/*Delete Product */}
-                  <button className="cursor-pointer">
-                    <Trash2 size={18} />
-                  </button>
+                  <DeleteProductButton productId={product.id} deleteProduct={deleteProduct} />
 
                   {/*Edit Product */}
                   <Link href={`/product/update/${product.id}`}>

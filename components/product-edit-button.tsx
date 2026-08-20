@@ -27,6 +27,7 @@ export default function ProductEditButton({ product, categories }: Props) {
             {isModalOpen && (
                 <ProductModal
                     categories={categories}
+                    product={product}
                     mode="edit"
                     onClose={() => setIsModalOpen(false)}
                 />

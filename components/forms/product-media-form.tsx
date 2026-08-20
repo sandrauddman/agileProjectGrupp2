@@ -1,7 +1,10 @@
+import type { Product } from '@/app/types';
 
+type Props = {
+    product?: Product;
+};
 
-
-export default function ProductMediaForm() {
+export default function ProductMediaForm({ product }: Props) {
 
     return (
         <section className="grid gap-5">
@@ -12,6 +15,7 @@ export default function ProductMediaForm() {
                     name="thumbnail"
                     id="thumbnail"
                     placeholder="add URL for small picture"
+                    defaultValue={product?.thumbnail ?? ''}
                     className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
                 />
             </div>
@@ -22,6 +26,7 @@ export default function ProductMediaForm() {
                     name="images"
                     id="images"
                     placeholder="add URL's for images. Separate by comma. "
+                    defaultValue={product?.images?.join(', ') ?? ''}
                     className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
                 />
             </div>
@@ -40,6 +45,7 @@ export default function ProductMediaForm() {
                             type="number"
                             min="0"
                             placeholder="0"
+                            defaultValue={product?.dimensions?.height ?? ''}
                             className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                         />
                     </div>
@@ -55,6 +61,7 @@ export default function ProductMediaForm() {
                             type="number"
                             min="0"
                             placeholder="0"
+                            defaultValue={product?.dimensions?.width ?? ''}
                             className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                         />
                     </div>
@@ -70,6 +77,7 @@ export default function ProductMediaForm() {
                             type="number"
                             min="0"
                             placeholder="0"
+                            defaultValue={product?.dimensions?.depth ?? ''}
                             className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                         />
                     </div>

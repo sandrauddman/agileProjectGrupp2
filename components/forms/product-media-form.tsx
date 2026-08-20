@@ -44,6 +44,7 @@ export default function ProductMediaForm({ product }: Props) {
                             id="height"
                             type="number"
                             min="0"
+                            step="0.01"
                             placeholder="0"
                             defaultValue={product?.dimensions?.height ?? ''}
                             className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
@@ -60,6 +61,7 @@ export default function ProductMediaForm({ product }: Props) {
                             id="width"
                             type="number"
                             min="0"
+                            step="0.01"
                             placeholder="0"
                             defaultValue={product?.dimensions?.width ?? ''}
                             className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
@@ -76,6 +78,7 @@ export default function ProductMediaForm({ product }: Props) {
                             id="depth"
                             type="number"
                             min="0"
+                            step="0.01"
                             placeholder="0"
                             defaultValue={product?.dimensions?.depth ?? ''}
                             className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"

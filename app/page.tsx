@@ -48,6 +48,7 @@ export default async function Home({ searchParams }: PageProps) {
           <ProductListComponent
             products={products}
             categoryParam={categoryParams}
+            stockParam={stockParams}
             currentPage={productResponse.success ? productResponse.data.page : currentPage}
             totalPage={productResponse.success ? productResponse.data.pages : 0}
           />

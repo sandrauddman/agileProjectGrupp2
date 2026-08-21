@@ -7,7 +7,7 @@ import ProductPagination from '@/components/product-pagination';
 import ProductDeleteButton from '@/components/product-delete-button';
 
 //Actions
-import { deleteProduct } from '@/app/actions/product-action';
+import { deleteProduct } from '@/actions/product-action';
 
 type Props = {
   products: Product[];

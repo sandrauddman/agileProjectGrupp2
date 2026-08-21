@@ -1,4 +1,4 @@
-import type { ApiErrorResponse, ApiResponse, ApiSuccessResponse, ProductsResponse } from '@/app/types';
+import type { ApiErrorResponse, ApiResponse, ApiSuccessResponse, ProductDeleteResponse, ProductsResponse } from '@/app/types';
 
 const API_URL = 'http://localhost:4000';
 const defaultLimit = '6';
@@ -18,6 +18,32 @@ export default class ProductService {
         success: true,
         data: result,
       } satisfies ApiSuccessResponse<ProductsResponse>;
+    } catch (error) {
+      return {
+        success: false,
+        message: 'Kunde inte ansluta till servern',
+      } satisfies ApiErrorResponse;
+    }
+  }
+
+  //DELETE: Product
+  static async deleteProduct(productId: number): Promise<ProductDeleteResponse> {
+    try {
+      const response = await fetch(`${API_URL}/products/${productId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        return {
+          success: false,
+          message: 'Kunde inte ansluta till servern',
+        } satisfies ApiErrorResponse;
+      }
+
+      return {
+        success: true,
+        message: 'Remove successful product',
+      } satisfies ProductDeleteResponse;
     } catch (error) {
       return {
         success: false,

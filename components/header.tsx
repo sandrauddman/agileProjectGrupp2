@@ -27,7 +27,7 @@ export default function Header({ categories }: Props) {
             type="button"
             //Open product modal
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white hover:bg-indigo-700"
+            className="flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white hover:bg-indigo-700 cursor-pointer"
           >
             <Plus strokeWidth={3} size={18} />
             Add Product

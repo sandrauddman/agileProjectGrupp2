@@ -1,17 +1,24 @@
-import type { Product } from '@/app/types';
-import { Trash2, Pencil } from 'lucide-react';
-import Link from 'next/link';
+import type { Category, Product } from '@/app/types';
+import { Trash2 } from 'lucide-react';
 
 import ProductPagination from './product-pagination';
+import ProductEditButton from './product-edit-button';
 
 type Props = {
   products: Product[];
   currentPage: number;
   totalPage: number;
   categoryParam?: string;
+  categories: Category[];
 };
 
-export default function ProductList({ products, currentPage, totalPage, categoryParam }: Props) {
+export default function ProductList({
+  products,
+  currentPage,
+  totalPage,
+  categoryParam,
+  categories,
+}: Props) {
   return (
     <div className="mt-6 rounded-xl border border-gray-200 bg-whit">
       <table className="w-full">
@@ -59,9 +66,7 @@ export default function ProductList({ products, currentPage, totalPage, category
                   </button>
 
                   {/*Edit Product */}
-                  <Link href={`/product/update/${product.id}`}>
-                    <Pencil size={18} />
-                  </Link>
+                  <ProductEditButton product={product} categories={categories} />
                 </div>
               </td>
             </tr>

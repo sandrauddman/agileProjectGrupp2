@@ -1,10 +1,11 @@
-import { Category } from '@/app/types';
+import { Category, Product } from '@/app/types';
 
 type Props = {
   categories: Category[];
+  product?: Product;
 };
 
-export default function ProductInfoForm({ categories }: Props) {
+export default function ProductInfoForm({ categories, product }: Props) {
   return (
     <section>
       <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -17,6 +18,7 @@ export default function ProductInfoForm({ categories }: Props) {
             id="title"
             name="title"
             type="text"
+            defaultValue={product?.title ?? ''}
             className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
           />
         </div>
@@ -30,6 +32,7 @@ export default function ProductInfoForm({ categories }: Props) {
             id="description"
             name="description"
             rows={2}
+            defaultValue={product?.description ?? ''}
             className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
           />
         </div>
@@ -43,6 +46,7 @@ export default function ProductInfoForm({ categories }: Props) {
             id="brand"
             name="brand"
             type="text"
+            defaultValue={product?.brand ?? ''}
             className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
           />
         </div>
@@ -57,6 +61,7 @@ export default function ProductInfoForm({ categories }: Props) {
             name="tags"
             type="text"
             placeholder="e.g. beauty, mascara"
+            defaultValue={product?.tags?.join(', ') ?? ''}
             className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
           />
         </div>
@@ -69,7 +74,7 @@ export default function ProductInfoForm({ categories }: Props) {
           <select
             name="category"
             id="category"
-            defaultValue="0"
+            defaultValue={product?.categoryId?.toString() ?? '0'}
             className="mt-1 w-full rounded-lg border border-gray-300 bg-background px-3 py-2 text-foreground"
           >
             <option value="0" disabled>

@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 //Components
 import ProductPagination from '@/components/product-pagination';
-import DeleteProductButton from '@/components/delete-product-button';
+import ProductDeleteButton from '@/components/product-delete-button';
 
 type Props = {
   products: Product[];
@@ -61,7 +61,7 @@ export default function ProductList({ products, currentPage, totalPage, category
               <td className="px-6 py-4 text-center text-black">
                 <div className="flex justify-center gap-4">
                   {/*Delete Product */}
-                  <DeleteProductButton productId={product.id} deleteProduct={deleteProduct} />
+                  <ProductDeleteButton productId={product.id} deleteProduct={deleteProduct} />
 
                   {/*Edit Product */}
                   <Link href={`/product/update/${product.id}`}>

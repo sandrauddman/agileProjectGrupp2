@@ -5,7 +5,10 @@ import { toast } from 'sonner';
 
 type Props = {
   productId: number;
-  deleteProduct: (productId: number) => Promise<void>;
+  deleteProduct: (productId: number) => Promise<{
+    success: boolean;
+    message: string;
+  }>;
 };
 
 export default function DeleteProductButton({ productId, deleteProduct }: Props) {
@@ -15,8 +18,13 @@ export default function DeleteProductButton({ productId, deleteProduct }: Props)
       action: {
         label: 'Delete',
         onClick: async () => {
-          //Run the server action
-          await deleteProduct(productId);
+          const response = await deleteProduct(productId);
+
+          if (response.success) {
+            toast.success(response.message);
+          } else {
+            toast.error(response.message);
+          }
         },
       },
       cancel: {

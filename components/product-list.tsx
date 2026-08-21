@@ -6,6 +6,9 @@ import Link from 'next/link';
 import ProductPagination from '@/components/product-pagination';
 import ProductDeleteButton from '@/components/product-delete-button';
 
+//Actions
+import { deleteProduct } from '@/app/actions/product-action';
+
 type Props = {
   products: Product[];
   currentPage: number;
@@ -14,11 +17,6 @@ type Props = {
 };
 
 export default function ProductList({ products, currentPage, totalPage, categoryParam }: Props) {
-  const deleteProduct = async (productId: number) => {
-    'use server';
-    //Call API For product delete
-  };
-
   return (
     <div className="mt-6 rounded-xl border border-gray-200 bg-whit">
       <table className="w-full">

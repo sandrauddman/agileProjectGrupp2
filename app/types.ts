@@ -57,6 +57,11 @@ export interface ProductsResponse {
   pages: number;
 }
 
+export interface ProductDeleteResponse {
+  success: boolean;
+  message: string;
+}
+
 export interface CategoryResponse {
   categories: Category[];
 }

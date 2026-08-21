@@ -5,6 +5,8 @@ import ProductEditButton from '@/components/product-edit-button';
 
 //Actions
 import { deleteProduct } from '@/actions/product-action';
+
+//Types
 import type { Category, Product } from '@/app/types';
 
 type Props = {

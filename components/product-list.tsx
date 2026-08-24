@@ -1,18 +1,13 @@
-import type { Product } from '@/app/types';
-import { Pencil } from 'lucide-react';
-import Link from 'next/link';
-
 //Components
 import ProductPagination from '@/components/product-pagination';
 import ProductDeleteButton from '@/components/product-delete-button';
+import ProductEditButton from '@/components/product-edit-button';
 
 //Actions
 import { deleteProduct } from '@/actions/product-action';
-import type { Category, Product } from '@/app/types';
-import { Trash2 } from 'lucide-react';
 
-import ProductPagination from './product-pagination';
-import ProductEditButton from './product-edit-button';
+//Types
+import type { Category, Product } from '@/app/types';
 
 type Props = {
   products: Product[];
@@ -23,7 +18,7 @@ type Props = {
   categories: Category[];
 };
 
-export default function ProductList({ products, currentPage, totalPage, categoryParam, stockParam }: Props) {
+export default function ProductList({ products, currentPage, totalPage, categoryParam, categories }: Props) {
   return (
     <div className="mt-6 rounded-xl border border-gray-200 bg-whit">
       <table className="w-full">

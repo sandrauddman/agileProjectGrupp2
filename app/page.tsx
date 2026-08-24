@@ -47,6 +47,7 @@ export default async function Home({ searchParams }: PageProps) {
         <section className="mt-5">
           <ProductListComponent
             products={products}
+            categories={categories}
             categoryParam={categoryParams}
             stockParam={stockParams}
             currentPage={productResponse.success ? productResponse.data.page : currentPage}

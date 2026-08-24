@@ -11,7 +11,7 @@ type Props = {
 export default function ProductPagination({ currentPage, totalPages, categoryParam, stockParam}: Props) {
   
   return (
-    <div className="flex justify-end border-t border-gray-200 px-6 py-5">
+    <div className="flex justify-center border-t border-gray-200 px-6 py-5">
       <div className="flex items-center gap-2">
         {/*Left arrow */}
         {currentPage > 1 && (
@@ -20,6 +20,16 @@ export default function ProductPagination({ currentPage, totalPages, categoryPar
             href={`/?page=${currentPage - 1}&category=${categoryParam}&stock=${stockParam}`}
           >
             <ChevronLeft size={18} />
+          </Link>
+        )}
+
+        {/* First page */}
+        {currentPage > 1 && (
+          <Link
+            href={`/?page=1&category=${categoryParam}`}
+            className="flex h-10 w-10 items-center justify-center rounded-md border border-gray-300 bg-white text-gray-600 hover:bg-gray-100"
+          >
+            1
           </Link>
         )}
 
@@ -47,7 +57,7 @@ export default function ProductPagination({ currentPage, totalPages, categoryPar
         )}
 
         {/*Number of total page */}
-        {currentPage + 1 <= totalPages && (
+        {currentPage + 2 < totalPages && (
           <Link
             href={`/?page=${totalPages}&category=${categoryParam}&stock=${stockParam}`}
             className="flex h-10 w-10 items-center justify-center rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-100"

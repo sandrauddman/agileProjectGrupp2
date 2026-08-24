@@ -1,8 +1,18 @@
 import type { Product } from '@/app/types';
-import { Trash2, Pencil } from 'lucide-react';
+import { Pencil } from 'lucide-react';
 import Link from 'next/link';
 
+//Components
+import ProductPagination from '@/components/product-pagination';
+import ProductDeleteButton from '@/components/product-delete-button';
+
+//Actions
+import { deleteProduct } from '@/actions/product-action';
+import type { Category, Product } from '@/app/types';
+import { Trash2 } from 'lucide-react';
+
 import ProductPagination from './product-pagination';
+import ProductEditButton from './product-edit-button';
 
 type Props = {
   products: Product[];
@@ -10,6 +20,7 @@ type Props = {
   totalPage: number;
   categoryParam?: string;
   stockParam?: string;
+  categories: Category[];
 };
 
 export default function ProductList({ products, currentPage, totalPage, categoryParam, stockParam }: Props) {
@@ -55,14 +66,10 @@ export default function ProductList({ products, currentPage, totalPage, category
               <td className="px-6 py-4 text-center text-black">
                 <div className="flex justify-center gap-4">
                   {/*Delete Product */}
-                  <button className="cursor-pointer">
-                    <Trash2 size={18} />
-                  </button>
+                  <ProductDeleteButton productId={product.id} deleteProduct={deleteProduct} />
 
                   {/*Edit Product */}
-                  <Link href={`/product/update/${product.id}`}>
-                    <Pencil size={18} />
-                  </Link>
+                  <ProductEditButton product={product} categories={categories} />
                 </div>
               </td>
             </tr>

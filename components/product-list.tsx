@@ -18,7 +18,7 @@ type Props = {
   categories: Category[];
 };
 
-export default function ProductList({ products, currentPage, totalPage, categoryParam, categories }: Props) {
+export default function ProductList({ products, currentPage, totalPage, categoryParam, categories, stockParam }: Props) {
   return (
     <div className="mt-6 rounded-xl border border-gray-200 bg-whit">
       <table className="w-full">

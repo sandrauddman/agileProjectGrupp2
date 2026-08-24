@@ -22,8 +22,9 @@ export default function PricingInventoryForm({ product }: Props) {
                         type="number"
                         step="0.01"
                         min="0"
+                        placeholder='0'
                         defaultValue={product?.price ?? ''}
-                        className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
+                        className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-foreground"
                     />
                 </div>
 
@@ -42,8 +43,9 @@ export default function PricingInventoryForm({ product }: Props) {
                         step="0.01"
                         min="0"
                         max="100"
+                        placeholder='0'
                         defaultValue={product?.discountPercentage ?? ''}
-                        className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
+                        className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-foreground"
                     />
                 </div>
 
@@ -61,8 +63,9 @@ export default function PricingInventoryForm({ product }: Props) {
                         type="number"
                         step="1"
                         min="0"
+                        placeholder='0'
                         defaultValue={product?.stock ?? ''}
-                        className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
+                        className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-foreground"
                     />
                 </div>
 
@@ -80,8 +83,9 @@ export default function PricingInventoryForm({ product }: Props) {
                         type="number"
                         step="1"
                         min="1"
+                        placeholder='0'
                         defaultValue={product?.minimumOrderQuantity ?? ''}
-                        className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
+                        className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-foreground"
                     />
                 </div>
             </div>

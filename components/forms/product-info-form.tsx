@@ -19,7 +19,7 @@ export default function ProductInfoForm({ categories, product }: Props) {
             name="title"
             type="text"
             defaultValue={product?.title ?? ''}
-            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
+            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-foreground"
           />
         </div>
 
@@ -33,7 +33,7 @@ export default function ProductInfoForm({ categories, product }: Props) {
             name="description"
             rows={2}
             defaultValue={product?.description ?? ''}
-            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
+            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-foreground"
           />
         </div>
 
@@ -47,7 +47,7 @@ export default function ProductInfoForm({ categories, product }: Props) {
             name="brand"
             type="text"
             defaultValue={product?.brand ?? ''}
-            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
+            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-foreground"
           />
         </div>
 
@@ -60,9 +60,9 @@ export default function ProductInfoForm({ categories, product }: Props) {
             id="tags"
             name="tags"
             type="text"
-            placeholder="e.g. beauty, mascara"
+            placeholder="Tags separated by commas"
             defaultValue={product?.tags?.join(', ') ?? ''}
-            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
+            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-foreground"
           />
         </div>
 

@@ -18,7 +18,7 @@ export default function ProductEditButton({ product, categories }: Props) {
             <button
                 type="button"
                 onClick={() => setIsModalOpen(true)}
-                className="cursor-pointer"
+                className="cursor-pointer flex"
                 aria-label={`Edit ${product.title}`}
             >
                 <Pencil size={18} />

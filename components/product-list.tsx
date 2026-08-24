@@ -19,16 +19,11 @@ type Props = {
   currentPage: number;
   totalPage: number;
   categoryParam?: string;
+  stockParam?: string;
   categories: Category[];
 };
 
-export default function ProductList({
-  products,
-  currentPage,
-  totalPage,
-  categoryParam,
-  categories,
-}: Props) {
+export default function ProductList({ products, currentPage, totalPage, categoryParam, stockParam }: Props) {
   return (
     <div className="mt-6 rounded-xl border border-gray-200 bg-whit">
       <table className="w-full">
@@ -81,7 +76,7 @@ export default function ProductList({
           ))}
         </tbody>
       </table>
-      <ProductPagination currentPage={currentPage} totalPages={totalPage} categoryParam={categoryParam} />
+      <ProductPagination currentPage={currentPage} totalPages={totalPage} categoryParam={categoryParam} stockParam={stockParam} />
     </div>
   );
 }

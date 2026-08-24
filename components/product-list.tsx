@@ -14,6 +14,7 @@ type Props = {
   currentPage: number;
   totalPage: number;
   categoryParam?: string;
+  stockParam?: string;
   categories: Category[];
 };
 
@@ -70,7 +71,7 @@ export default function ProductList({ products, currentPage, totalPage, category
           ))}
         </tbody>
       </table>
-      <ProductPagination currentPage={currentPage} totalPages={totalPage} categoryParam={categoryParam} />
+      <ProductPagination currentPage={currentPage} totalPages={totalPage} categoryParam={categoryParam} stockParam={stockParam} />
     </div>
   );
 }

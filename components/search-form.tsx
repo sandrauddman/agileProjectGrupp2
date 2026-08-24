@@ -4,9 +4,10 @@ import { Category } from '@/app/types';
 type Props = {
   categories: Category[];
   selectedCategory: string;
+  selectedStock: string;
 };
 
-export default function SearchForm({ categories, selectedCategory }: Props) {
+export default function SearchForm({ categories, selectedCategory, selectedStock }: Props) {
   return (
     <form action="/" method="GET" className="bg-white border-1 border-zinc-200 rounded-sm flex p-4 gap-4 mt-6 text-sm">
       <label htmlFor="search" hidden>
@@ -30,13 +31,13 @@ export default function SearchForm({ categories, selectedCategory }: Props) {
       <label htmlFor="stock" hidden>
         Select Stock amount
       </label>
-      <select name="stock" id="stock" defaultValue={'0'} className="border-1 border-zinc-200 rounded-sm p-2 grow-2">
-        <option value="0" disabled>
+      <select name="stock" id="stock" defaultValue={selectedStock} className="border-1 border-zinc-200 rounded-sm p-2 grow-2">
+        <option value="">
           All Stock
         </option>
-        <option value="2">In stock</option>
-        <option value="3">Low stock</option>
-        <option value="4">Out of Stock</option>
+         <option value="inStock">In stock</option>
+        <option value="lowStock">Low stock</option>
+        <option value="outofStock">Out of Stock</option>
       </select>
 
       <button className="border-1 border-zinc-200 hover:bg-zinc-300 rounded-sm flex gap-2 p-2  justify-center">

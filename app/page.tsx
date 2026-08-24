@@ -14,6 +14,7 @@ type PageProps = {
     page?: string;
     category?: string;
     stock?: string;
+    search?: string;
   }>;
 };
 
@@ -29,8 +30,11 @@ export default async function Home({ searchParams }: PageProps) {
   //Filter on stock with params
   const stockParams= params.stock ?? '';
 
+  //Filter on query with params
+  const queryParams= params.search ?? '';
+
   //Call Product Service for API Call
-  const productResponse = await ProductService.getProducts(currentPage, categoryParams, stockParams);
+  const productResponse = await ProductService.getProducts(currentPage, categoryParams, stockParams, queryParams);
   const products: Product[] = productResponse.success ? productResponse.data.products : [];
 
   //Call Category Service for API CALL

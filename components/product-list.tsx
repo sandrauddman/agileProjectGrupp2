@@ -72,6 +72,7 @@ export default function ProductList({ products, currentPage, totalPage, category
         </tbody>
       </table>
       <ProductPagination currentPage={currentPage} totalPages={totalPage} categoryParam={categoryParam} stockParam={stockParam} />
+
     </div>
   );
 }

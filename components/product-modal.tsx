@@ -1,6 +1,7 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
+import { useFormStatus } from 'react-dom';
 
 import ProductInfoForm from './forms/product-info-form';
 import { Category, Product } from '@/app/types';
@@ -9,6 +10,7 @@ import { X } from 'lucide-react';
 import PricingInventoryForm from './forms/pricing-inventory-form';
 import ProductMediaForm from './forms/product-media-form';
 import { updateProduct } from '@/actions/product-action';
+import { toast } from 'sonner';
 
 type ProductModalProps = {
     mode: 'add' | 'edit';
@@ -16,6 +18,20 @@ type ProductModalProps = {
     categories: Category[];
     product?: Product;
 };
+
+function SaveProductButton() {
+    const { pending } = useFormStatus();
+
+    return (
+        <button
+            type="submit"
+            disabled={pending}
+            className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+        >
+            {pending ? 'Saving...' : 'Save Product'}
+        </button>
+    );
+}
 
 export default function ProductModal({ mode, onClose, categories, product }: ProductModalProps) {
     const title = mode === 'add' ? 'Add Product' : 'Edit Product';
@@ -31,6 +47,19 @@ export default function ProductModal({ mode, onClose, categories, product }: Pro
         success: false,
         message: '',
     });
+
+    useEffect(() => {
+        if (!state.message) {
+            return;
+        }
+
+        if (state.success) {
+            toast.success(state.message);
+            onClose();
+        } else {
+            toast.error(state.message);
+        }
+    }, [state, onClose]);
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black/50">
@@ -70,12 +99,7 @@ export default function ProductModal({ mode, onClose, categories, product }: Pro
                             Cancel
                         </button>
 
-                        <button
-                            type="submit"
-                            className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white hover:bg-indigo-700 cursor-pointer"
-                        >
-                            Save Product
-                        </button>
+                        <SaveProductButton />
                     </div>
                 </form>
             </section>

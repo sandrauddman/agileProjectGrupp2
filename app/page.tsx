@@ -54,6 +54,7 @@ export default async function Home({ searchParams }: PageProps) {
             categories={categories}
             categoryParam={categoryParams}
             stockParam={stockParams}
+            queryParam={queryParams}
             currentPage={productResponse.success ? productResponse.data.page : currentPage}
             totalPage={productResponse.success ? productResponse.data.pages : 0}
           />

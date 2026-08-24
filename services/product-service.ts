@@ -1,4 +1,4 @@
-import type { ApiErrorResponse, ApiResponse, ApiSuccessResponse, ProductDeleteResponse, ProductsResponse } from '@/app/types';
+import type { ApiErrorResponse, ApiResponse, ApiSuccessResponse, ProductDeleteResponse, ProductsResponse, Product } from '@/app/types';
 
 const API_URL = 'http://localhost:4000';
 const defaultLimit = '6';
@@ -54,6 +54,39 @@ export default class ProductService {
         success: true,
         message: 'Remove successful product',
       } satisfies ProductDeleteResponse;
+    } catch (error) {
+      return {
+        success: false,
+        message: 'Kunde inte ansluta till servern',
+      } satisfies ApiErrorResponse;
+    }
+  }
+
+    //PATCH/EDIT: Product
+  static async updateProduct(productId: number, product: Partial<Product>): Promise<ApiResponse<Product>> {
+    try {
+      const response = await fetch(`${API_URL}/products/${productId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(product),
+      });
+
+      if (!response.ok) {
+        return {
+          success: false,
+          message: 'Produkten kunde inte uppdateras',
+        } satisfies ApiErrorResponse;
+      }
+
+      const result = await response.json();
+
+      return {
+        success: true,
+        data: result,
+        message: 'Product updated successfully',
+      } satisfies ApiSuccessResponse<Product>;
     } catch (error) {
       return {
         success: false,

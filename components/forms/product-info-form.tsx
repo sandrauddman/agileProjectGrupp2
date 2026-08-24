@@ -67,13 +67,13 @@ export default function ProductInfoForm({ categories, product }: Props) {
         </div>
 
         <div>
-          <label htmlFor="category" className="block text-sm font-medium text-foreground">
+          <label htmlFor="categoryId" className="block text-sm font-medium text-foreground">
             Category
           </label>
 
           <select
-            name="category"
-            id="category"
+            name="categoryId"
+            id="categoryId"
             defaultValue={product?.categoryId?.toString() ?? '0'}
             className="mt-1 w-full rounded-lg border border-gray-300 bg-background px-3 py-2 text-foreground"
           >

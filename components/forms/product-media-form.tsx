@@ -42,6 +42,7 @@ export default function ProductMediaForm({ product }: Props) {
                         </label>
                         <input
                             id="height"
+                            name="height"
                             type="number"
                             min="0"
                             step="0.01"
@@ -59,6 +60,7 @@ export default function ProductMediaForm({ product }: Props) {
 
                         <input
                             id="width"
+                            name="width"
                             type="number"
                             min="0"
                             step="0.01"
@@ -76,6 +78,7 @@ export default function ProductMediaForm({ product }: Props) {
 
                         <input
                             id="depth"
+                            name="depth"
                             type="number"
                             min="0"
                             step="0.01"

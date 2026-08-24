@@ -1,9 +1,15 @@
+'use client';
+
+import { useActionState } from 'react';
+
 import ProductInfoForm from './forms/product-info-form';
 import { Category, Product } from '@/app/types';
 import { X } from 'lucide-react';
 
-import PricingInventoryForm from "./forms/pricing-inventory-form";
+import PricingInventoryForm from './forms/pricing-inventory-form';
 import ProductMediaForm from './forms/product-media-form';
+import { updateProduct } from '@/actions/product-action';
+
 type ProductModalProps = {
     mode: 'add' | 'edit';
     onClose: () => void;
@@ -13,6 +19,19 @@ type ProductModalProps = {
 
 export default function ProductModal({ mode, onClose, categories, product }: ProductModalProps) {
     const title = mode === 'add' ? 'Add Product' : 'Edit Product';
+
+    const updateProductWithId = product
+        ? updateProduct.bind(null, product.id)
+        : async () => ({
+            success: false,
+            message: 'Product not found',
+        });
+
+    const [state, formAction] = useActionState(updateProductWithId, {
+        success: false,
+        message: '',
+    });
+
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black/50">
             <section
@@ -36,11 +55,12 @@ export default function ProductModal({ mode, onClose, categories, product }: Pro
                     </h2>
                 </header>
 
-                <form className="mt-6 space-y-6">
+                <form action={formAction} className="mt-6 space-y-6">
                     {/* forms components here */}
                     <ProductInfoForm categories={categories} product={product} />
                     <PricingInventoryForm product={product} />
                     <ProductMediaForm product={product} />
+
                     <div className="flex justify-end gap-3">
                         <button
                             type="button"

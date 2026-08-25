@@ -7,7 +7,6 @@ import ProductListComponent from '@/components/product-list';
 import Header from '@/components/header';
 import InventoryStatistics from '@/components/inventory-statistics';
 import SearchForm from '@/components/search-form';
-import { Category, Product } from './types';
 
 type PageProps = {
   searchParams: Promise<{
@@ -27,15 +26,12 @@ export default async function Home({ searchParams }: PageProps) {
   const categoryParams = params.category ?? '';
 
   //Filter on stock with params
-  const stockParams= params.stock ?? '';
+  const stockParams = params.stock ?? '';
 
-  //Call Product Service for API Call
-  const productResponse = await ProductService.getProducts(currentPage, categoryParams, stockParams);
-  const products: Product[] = productResponse.success ? productResponse.data.products : [];
+  const [productResponse, categoryResponse] = await Promise.all([ProductService.getProducts(currentPage, categoryParams, stockParams), CategoryService.getAllCategories()]);
 
-  //Call Category Service for API CALL
-  const categoryResponse = await CategoryService.getAllCategories();
-  const categories: Category[] = categoryResponse.success ? categoryResponse.data.categories : [];
+  const products = productResponse.success ? productResponse.data.products : [];
+  const categories = categoryResponse.success ? categoryResponse.data.categories : [];
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -43,6 +39,7 @@ export default async function Home({ searchParams }: PageProps) {
 
       <div className="container max-w-7xl mx-auto px-6 py-6">
         <InventoryStatistics />
+
         <SearchForm categories={categories} selectedCategory={categoryParams} selectedStock={stockParams} />
         <section className="mt-5">
           <ProductListComponent

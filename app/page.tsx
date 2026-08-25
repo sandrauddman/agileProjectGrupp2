@@ -8,6 +8,8 @@ import Header from '@/components/header';
 import InventoryStatistics from '@/components/inventory-statistics';
 import SearchForm from '@/components/search-form';
 import { Category, Product } from './types';
+import { Suspense } from 'react';
+import LoadingSpinner from '@/app/loading';
 
 type PageProps = {
   searchParams: Promise<{
@@ -28,7 +30,7 @@ export default async function Home({ searchParams }: PageProps) {
   const categoryParams = params.category ?? '';
 
   //Filter on stock with params
-  const stockParams= params.stock ?? '';
+  const stockParams = params.stock ?? '';
 
   //Filter on query with params
   const queryParams= params.search ?? '';
@@ -47,6 +49,7 @@ export default async function Home({ searchParams }: PageProps) {
 
       <div className="container max-w-7xl mx-auto px-6 py-6">
         <InventoryStatistics />
+
         <SearchForm categories={categories} selectedCategory={categoryParams} selectedStock={stockParams} />
         <section className="mt-5">
           <ProductListComponent

@@ -13,6 +13,7 @@ type PageProps = {
     page?: string;
     category?: string;
     stock?: string;
+    search?: string;
   }>;
 };
 
@@ -25,10 +26,15 @@ export default async function Home({ searchParams }: PageProps) {
   //Filter on category with params
   const categoryParams = params.category ?? '';
 
+  const queryParams = params.search ?? '';
+
   //Filter on stock with params
   const stockParams = params.stock ?? '';
 
-  const [productResponse, categoryResponse] = await Promise.all([ProductService.getProducts(currentPage, categoryParams, stockParams), CategoryService.getAllCategories()]);
+  const [productResponse, categoryResponse] = await Promise.all([
+    ProductService.getProducts(currentPage, categoryParams, stockParams, queryParams),
+    CategoryService.getAllCategories(),
+  ]);
 
   const products = productResponse.success ? productResponse.data.products : [];
   const categories = categoryResponse.success ? categoryResponse.data.categories : [];
@@ -47,6 +53,7 @@ export default async function Home({ searchParams }: PageProps) {
             categories={categories}
             categoryParam={categoryParams}
             stockParam={stockParams}
+            queryParam={queryParams}
             currentPage={productResponse.success ? productResponse.data.page : currentPage}
             totalPage={productResponse.success ? productResponse.data.pages : 0}
           />

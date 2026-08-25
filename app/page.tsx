@@ -8,12 +8,15 @@ import Header from '@/components/header';
 import InventoryStatistics from '@/components/inventory-statistics';
 import SearchForm from '@/components/search-form';
 import { Category, Product } from './types';
+import { Suspense } from 'react';
+import LoadingSpinner from '@/app/loading';
 
 type PageProps = {
   searchParams: Promise<{
     page?: string;
     category?: string;
     stock?: string;
+    search?: string;
   }>;
 };
 
@@ -27,10 +30,13 @@ export default async function Home({ searchParams }: PageProps) {
   const categoryParams = params.category ?? '';
 
   //Filter on stock with params
-  const stockParams= params.stock ?? '';
+  const stockParams = params.stock ?? '';
+
+  //Filter on query with params
+  const queryParams= params.search ?? '';
 
   //Call Product Service for API Call
-  const productResponse = await ProductService.getProducts(currentPage, categoryParams, stockParams);
+  const productResponse = await ProductService.getProducts(currentPage, categoryParams, stockParams, queryParams);
   const products: Product[] = productResponse.success ? productResponse.data.products : [];
 
   //Call Category Service for API CALL
@@ -43,6 +49,7 @@ export default async function Home({ searchParams }: PageProps) {
 
       <div className="container max-w-7xl mx-auto px-6 py-6">
         <InventoryStatistics />
+
         <SearchForm categories={categories} selectedCategory={categoryParams} selectedStock={stockParams} />
         <section className="mt-5">
           <ProductListComponent
@@ -50,6 +57,7 @@ export default async function Home({ searchParams }: PageProps) {
             categories={categories}
             categoryParam={categoryParams}
             stockParam={stockParams}
+            queryParam={queryParams}
             currentPage={productResponse.success ? productResponse.data.page : currentPage}
             totalPage={productResponse.success ? productResponse.data.pages : 0}
           />

@@ -70,7 +70,34 @@ export default class ProductService {
         data: result,
         message: 'Product updated successfully',
       } satisfies ApiSuccessResponse<Product>;
-    } catch (error) {
+    } catch {
+      return errorResponse('Kunde inte ansluta till servern.');
+    }
+  }
+
+  //POST/CREATE: Product
+  static async createProduct(product: Partial<Product>): Promise<ApiResponse<Product>> {
+    try {
+      const response = await fetch(`${API_URL}/products`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(product),
+      });
+
+      if (!response.ok) {
+        return errorResponse('Produkten kunde inte skapas');
+      }
+
+      const result = await response.json();
+
+      return {
+        success: true,
+        data: result,
+        message: 'Product created successfully',
+      } satisfies ApiSuccessResponse<Product>;
+    } catch {
       return errorResponse('Kunde inte ansluta till servern.');
     }
   }

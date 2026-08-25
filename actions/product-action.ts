@@ -23,12 +23,8 @@ export async function deleteProduct(productId: number) {
   };
 }
 
-export async function updateProduct(
-  productId: number,
-  previousState: { success: boolean; message: string },
-  formData: FormData
-) {
-  const updatedProduct: Partial<Product> = {
+function getProductFromFormData(formData: FormData): Partial<Product> {
+  return {
     title: String(formData.get('title') ?? ''),
     description: String(formData.get('description') ?? ''),
     brand: String(formData.get('brand') ?? ''),
@@ -52,8 +48,16 @@ export async function updateProduct(
       depth: Number(formData.get('depth')),
     },
   };
+}
 
-  const response = await ProductService.updateProduct(productId, updatedProduct);
+export async function updateProduct(
+  productId: number,
+  _previousState: { success: boolean; message: string },
+  formData: FormData
+) {
+  const product = getProductFromFormData(formData);
+
+  const response = await ProductService.updateProduct(productId, product);
 
   if (!response.success) {
     return {
@@ -67,5 +71,28 @@ export async function updateProduct(
   return {
     success: true,
     message: 'Product updated successfully',
+  };
+}
+
+export async function createProduct(
+  _previousState: { success: boolean; message: string },
+  formData: FormData
+) {
+  const product = getProductFromFormData(formData);
+
+  const response = await ProductService.createProduct(product);
+
+  if (!response.success) {
+    return {
+      success: false,
+      message: 'Product could not be created',
+    };
+  }
+
+  revalidatePath('/');
+
+  return {
+    success: true,
+    message: 'Product created successfully',
   };
 }

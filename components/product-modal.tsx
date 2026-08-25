@@ -9,7 +9,7 @@ import { X } from 'lucide-react';
 
 import PricingInventoryForm from './forms/pricing-inventory-form';
 import ProductMediaForm from './forms/product-media-form';
-import { updateProduct } from '@/actions/product-action';
+import { createProduct, updateProduct } from '@/actions/product-action';
 import { toast } from 'sonner';
 
 type ProductModalProps = {
@@ -35,18 +35,18 @@ function SaveProductButton() {
 
 export default function ProductModal({ mode, onClose, categories, product }: ProductModalProps) {
     const title = mode === 'add' ? 'Add Product' : 'Edit Product';
-    // bind the current product id to the server action before submitting the form
-    const updateProductWithId = product
+
+    // choose the server action based on whether the modal is adding or editing a product
+    const action = mode === 'edit' && product
         ? updateProduct.bind(null, product.id)
-        : async () => ({
-            success: false,
-            message: 'Product not found',
-        });
+        : createProduct;
+
     //useActionState connects form to server action and tracks its result
-    const [state, formAction] = useActionState(updateProductWithId, {
+    const [state, formAction] = useActionState(action, {
         success: false,
         message: '',
     });
+
     //show feedback after server action finishes
     useEffect(() => {
         if (!state.message) {

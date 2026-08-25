@@ -45,18 +45,17 @@ export default async function Home({ searchParams }: PageProps) {
 
       <div className="container max-w-7xl mx-auto px-6 py-6">
         <InventoryStatistics />
+
         <SearchForm categories={categories} selectedCategory={categoryParams} selectedStock={stockParams} />
         <section className="mt-5">
-          <Suspense fallback={<LoadingSpinner />}>
-            <ProductListComponent
-              products={products}
-              categories={categories}
-              categoryParam={categoryParams}
-              stockParam={stockParams}
-              currentPage={productResponse.success ? productResponse.data.page : currentPage}
-              totalPage={productResponse.success ? productResponse.data.pages : 0}
-            />
-          </Suspense>
+          <ProductListComponent
+            products={products}
+            categories={categories}
+            categoryParam={categoryParams}
+            stockParam={stockParams}
+            currentPage={productResponse.success ? productResponse.data.page : currentPage}
+            totalPage={productResponse.success ? productResponse.data.pages : 0}
+          />
         </section>
       </div>
     </main>

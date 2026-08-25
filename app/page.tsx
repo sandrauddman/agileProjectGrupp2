@@ -7,9 +7,6 @@ import ProductListComponent from '@/components/product-list';
 import Header from '@/components/header';
 import InventoryStatistics from '@/components/inventory-statistics';
 import SearchForm from '@/components/search-form';
-import { Category, Product } from './types';
-import { Suspense } from 'react';
-import LoadingSpinner from '@/app/loading';
 
 type PageProps = {
   searchParams: Promise<{
@@ -29,19 +26,18 @@ export default async function Home({ searchParams }: PageProps) {
   //Filter on category with params
   const categoryParams = params.category ?? '';
 
+  const queryParams = params.search ?? '';
+
   //Filter on stock with params
   const stockParams = params.stock ?? '';
 
-  //Filter on query with params
-  const queryParams= params.search ?? '';
+  const [productResponse, categoryResponse] = await Promise.all([
+    ProductService.getProducts(currentPage, categoryParams, stockParams, queryParams),
+    CategoryService.getAllCategories(),
+  ]);
 
-  //Call Product Service for API Call
-  const productResponse = await ProductService.getProducts(currentPage, categoryParams, stockParams, queryParams);
-  const products: Product[] = productResponse.success ? productResponse.data.products : [];
-
-  //Call Category Service for API CALL
-  const categoryResponse = await CategoryService.getAllCategories();
-  const categories: Category[] = categoryResponse.success ? categoryResponse.data.categories : [];
+  const products = productResponse.success ? productResponse.data.products : [];
+  const categories = categoryResponse.success ? categoryResponse.data.categories : [];
 
   return (
     <main className="min-h-screen bg-gray-50">

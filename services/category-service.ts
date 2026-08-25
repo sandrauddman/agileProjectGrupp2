@@ -1,4 +1,5 @@
-import { ApiErrorResponse, ApiResponse, ApiSuccessResponse, CategoryResponse } from '@/app/types';
+import { ApiResponse, ApiSuccessResponse, CategoryResponse } from '@/app/types';
+import { errorResponse } from '@/utils/error-response';
 
 const API_URL = 'http://localhost:4000';
 
@@ -17,10 +18,7 @@ export default class CategoryService {
         },
       } satisfies ApiSuccessResponse<CategoryResponse>;
     } catch (error) {
-      return {
-        success: false,
-        message: 'Server fel vid hämtning av kategorier',
-      } satisfies ApiErrorResponse;
+      return errorResponse('Kunde inte ansluta till servern.');
     }
   }
 }

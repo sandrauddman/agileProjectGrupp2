@@ -35,19 +35,19 @@ function SaveProductButton() {
 
 export default function ProductModal({ mode, onClose, categories, product }: ProductModalProps) {
     const title = mode === 'add' ? 'Add Product' : 'Edit Product';
-
+    // bind the current product id to the server action before submitting the form
     const updateProductWithId = product
         ? updateProduct.bind(null, product.id)
         : async () => ({
             success: false,
             message: 'Product not found',
         });
-
+    //useActionState connects form to server action and tracks its result
     const [state, formAction] = useActionState(updateProductWithId, {
         success: false,
         message: '',
     });
-
+    //show feedback after server action finishes
     useEffect(() => {
         if (!state.message) {
             return;

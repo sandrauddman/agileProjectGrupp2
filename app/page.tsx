@@ -8,6 +8,8 @@ import Header from '@/components/header';
 import InventoryStatistics from '@/components/inventory-statistics';
 import SearchForm from '@/components/search-form';
 import { Category, Product } from './types';
+import { Suspense } from 'react';
+import LoadingSpinner from '@/app/loading';
 
 type PageProps = {
   searchParams: Promise<{
@@ -27,7 +29,7 @@ export default async function Home({ searchParams }: PageProps) {
   const categoryParams = params.category ?? '';
 
   //Filter on stock with params
-  const stockParams= params.stock ?? '';
+  const stockParams = params.stock ?? '';
 
   //Call Product Service for API Call
   const productResponse = await ProductService.getProducts(currentPage, categoryParams, stockParams);
@@ -45,14 +47,16 @@ export default async function Home({ searchParams }: PageProps) {
         <InventoryStatistics />
         <SearchForm categories={categories} selectedCategory={categoryParams} selectedStock={stockParams} />
         <section className="mt-5">
-          <ProductListComponent
-            products={products}
-            categories={categories}
-            categoryParam={categoryParams}
-            stockParam={stockParams}
-            currentPage={productResponse.success ? productResponse.data.page : currentPage}
-            totalPage={productResponse.success ? productResponse.data.pages : 0}
-          />
+          <Suspense fallback={<LoadingSpinner />}>
+            <ProductListComponent
+              products={products}
+              categories={categories}
+              categoryParam={categoryParams}
+              stockParam={stockParams}
+              currentPage={productResponse.success ? productResponse.data.page : currentPage}
+              totalPage={productResponse.success ? productResponse.data.pages : 0}
+            />
+          </Suspense>
         </section>
       </div>
     </main>

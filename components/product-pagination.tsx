@@ -9,7 +9,7 @@ type Props = {
   queryParam?: string;
 };
 
-export default function ProductPagination({ currentPage, totalPages, categoryParam, stockParam }: Props) {
+export default function ProductPagination({ currentPage, totalPages, categoryParam, stockParam, queryParam }: Props) {
   return (
     <div className="flex justify-center border-t border-gray-200 px-6 py-5">
       <div className="flex items-center gap-2">

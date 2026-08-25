@@ -11,7 +11,7 @@ export default function ProductMediaForm({ product }: Props) {
             <div>
                 <label htmlFor="thumbnail" className="block text-sm font-medium text-foreground">Thumbnail</label>
                 <input
-                    type="text"
+                    type="URL"
                     name="thumbnail"
                     id="thumbnail"
                     placeholder="add URL for small picture"

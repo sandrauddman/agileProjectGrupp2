@@ -6,9 +6,10 @@ const defaultLimit = '6';
 
 export default class ProductService {
   // GET: Products
-  static async getProducts(currentPage: number, categoryParams: string, stockParams: string): Promise<ApiResponse<ProductsResponse>> {
+  static async getProducts(currentPage: number, categoryParams: string, stockParams: string, queryParams: string): Promise<ApiResponse<ProductsResponse>> {
     try {
       const category = categoryParams ? `&categoryId=${categoryParams}` : '';
+      const query = queryParams ? `&q=${queryParams}` : '';
       const stockFilters: Record<string, string> = {
         inStock: `&stock_gte=10`,
         lowStock: `&stock_gte=1&stock_lte=10`,
@@ -17,7 +18,8 @@ export default class ProductService {
 
       const stock = stockFilters[stockParams] ?? '';
 
-      const response = await fetch(`${API_URL}/products?_page=${currentPage}&_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category${category}&_expand=stock${stock}`, {
+            
+      const response = await fetch(`${API_URL}/products?_page=${currentPage}&_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category${category}&_expand=stock${stock}&_expand=query${query}`, {
         method: 'GET',
       });
 

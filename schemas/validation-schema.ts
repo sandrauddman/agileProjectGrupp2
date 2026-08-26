@@ -6,7 +6,7 @@ export const addProductSchema = z.object({
   description: z.string().trim().min(1, 'Description is required.'),
   brand: z.string().trim().min(1, 'Brand is requried'),
   tags: z.string().trim().min(1, 'At least one tag is required.'),
-  category: z.string().refine((value) => value !== '0', {
+  categoryId: z.string().refine((value) => value !== '0', {
     message: 'Please select a category.',
   }),
 

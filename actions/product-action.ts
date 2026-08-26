@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import ProductService from '@/services/product-service';
 import type { Product } from '@/app/types';
+import { addProductSchema, editProduct } from '@/schemas/validation-schema';
 
 export async function deleteProduct(productId: number) {
   const response = await ProductService.deleteProduct(productId);
@@ -14,7 +15,7 @@ export async function deleteProduct(productId: number) {
     };
   }
 
-  //Telling NEXT.JS That product list neeed to be updated
+  // Telling NEXT.JS That product list needs to be updated
   revalidatePath('/');
 
   return {
@@ -23,6 +24,7 @@ export async function deleteProduct(productId: number) {
   };
 }
 
+// Convert FormData values into the format expected by ProductService
 function getProductFromFormData(formData: FormData): Partial<Product> {
   return {
     title: String(formData.get('title') ?? ''),
@@ -55,6 +57,30 @@ export async function updateProduct(
   _previousState: { success: boolean; message: string },
   formData: FormData
 ) {
+  // Validate form data before sending it to the API
+  const validation = editProduct.safeParse({
+    title: formData.get('title'),
+    description: formData.get('description'),
+    brand: formData.get('brand'),
+    tags: formData.get('tags'),
+    categoryId: formData.get('categoryId'),
+    price: formData.get('price'),
+    discountPercentage: formData.get('discountPercentage'),
+    stock: formData.get('stock'),
+    minimumOrderQuantity: formData.get('minimumOrderQuantity'),
+    height: formData.get('height'),
+    width: formData.get('width'),
+    depth: formData.get('depth'),
+  });
+  
+  // Stop if the form data does not pass validation
+  if (!validation.success) {
+    return {
+      success: false,
+      message: validation.error.issues[0].message,
+    };
+  }
+
   const product = getProductFromFormData(formData);
 
   const response = await ProductService.updateProduct(productId, product);
@@ -78,6 +104,28 @@ export async function createProduct(
   _previousState: { success: boolean; message: string },
   formData: FormData
 ) {
+  const validation = addProductSchema.safeParse({
+    title: formData.get('title'),
+    description: formData.get('description'),
+    brand: formData.get('brand'),
+    tags: formData.get('tags'),
+    categoryId: formData.get('categoryId'),
+    price: formData.get('price'),
+    discountPercentage: formData.get('discountPercentage'),
+    stock: formData.get('stock'),
+    minimumOrderQuantity: formData.get('minimumOrderQuantity'),
+    height: formData.get('height'),
+    width: formData.get('width'),
+    depth: formData.get('depth'),
+  });
+
+  if (!validation.success) {
+    return {
+      success: false,
+      message: validation.error.issues[0].message,
+    };
+  }
+
   const product = getProductFromFormData(formData);
 
   const response = await ProductService.createProduct(product);

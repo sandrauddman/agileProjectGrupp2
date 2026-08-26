@@ -84,11 +84,25 @@ export default function ProductModal({ mode, onClose, categories, product }: Pro
                     </h2>
                 </header>
 
-                <form action={formAction} className="mt-6 space-y-6">
+                <form
+                    key={state.values ? JSON.stringify(state.values) : 'initial'}
+                    action={formAction}
+                    className="mt-6 space-y-6"
+                >
                     {/* forms components here */}
-                    <ProductInfoForm categories={categories} product={product} />
-                    <PricingInventoryForm product={product} />
-                    <ProductMediaForm product={product} />
+                    <ProductInfoForm
+                        categories={categories}
+                        product={product}
+                        formValues={state.values}
+                    />
+                    <PricingInventoryForm
+                        product={product}
+                        formValues={state.values}
+                    />
+                    <ProductMediaForm
+                        product={product}
+                        formValues={state.values}
+                    />
 
                     <div className="flex justify-end gap-3">
                         <button

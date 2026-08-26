@@ -1,11 +1,13 @@
 import { Category, Product } from '@/app/types';
+import type { ProductFormValues } from '@/actions/product-action';
 
 type Props = {
   categories: Category[];
   product?: Product;
+  formValues?: ProductFormValues;
 };
 
-export default function ProductInfoForm({ categories, product }: Props) {
+export default function ProductInfoForm({ categories, product, formValues }: Props) {
   return (
     <section>
       <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -18,7 +20,8 @@ export default function ProductInfoForm({ categories, product }: Props) {
             id="title"
             name="title"
             type="text"
-            defaultValue={product?.title ?? ''}
+            defaultValue={formValues?.title ?? product?.title ?? ''}
+            onChange={() => { }}
             className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-foreground"
           />
         </div>
@@ -32,7 +35,8 @@ export default function ProductInfoForm({ categories, product }: Props) {
             id="description"
             name="description"
             rows={2}
-            defaultValue={product?.description ?? ''}
+            defaultValue={formValues?.description ?? product?.description ?? ''}
+            onChange={() => { }}
             className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-foreground"
           />
         </div>
@@ -46,7 +50,8 @@ export default function ProductInfoForm({ categories, product }: Props) {
             id="brand"
             name="brand"
             type="text"
-            defaultValue={product?.brand ?? ''}
+            defaultValue={formValues?.brand ?? product?.brand ?? ''}
+            onChange={() => { }}
             className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-foreground"
           />
         </div>
@@ -61,7 +66,8 @@ export default function ProductInfoForm({ categories, product }: Props) {
             name="tags"
             type="text"
             placeholder="Tags separated by commas"
-            defaultValue={product?.tags?.join(', ') ?? ''}
+            defaultValue={formValues?.tags ?? product?.tags?.join(', ') ?? ''}
+            onChange={() => { }}
             className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-foreground"
           />
         </div>
@@ -74,7 +80,8 @@ export default function ProductInfoForm({ categories, product }: Props) {
           <select
             name="categoryId"
             id="categoryId"
-            defaultValue={product?.categoryId?.toString() ?? '0'}
+            defaultValue={formValues?.categoryId ?? product?.categoryId?.toString() ?? '0'}
+            onChange={() => { }}
             className="mt-1 w-full rounded-lg border border-gray-300 bg-background px-3 py-2 text-foreground"
           >
             <option value="0" disabled>

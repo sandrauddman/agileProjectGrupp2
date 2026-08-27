@@ -16,6 +16,9 @@ export const addProductSchema = z.object({
   stock: z.coerce.number().int('Stock must be a whole number.').min(0, 'Stock cannot be less than 0.'),
   minimumOrderQuantity: z.coerce.number().int('Minimum order must be a whole number.').min(1, 'Minimum order must be at least 1.'),
 
+  // Product Media
+  thumbnail: z.string().trim().min(1, 'Thumbnail is required.'),
+
   // Dimensions - Optional number: allows an empty value or a number greater than or equal to 0.
   height: z.union([z.literal(''), z.coerce.number().min(0)]).optional(),
   width: z.union([z.literal(''), z.coerce.number().min(0)]).optional(),

@@ -1,10 +1,12 @@
 import type { Product } from '@/app/types';
+import type { ProductFormValues } from '@/actions/product-action';
 
 type Props = {
     product?: Product;
+    formValues?: ProductFormValues;
 };
 
-export default function PricingInventoryForm({ product }: Props) {
+export default function PricingInventoryForm({ product, formValues }: Props) {
     return (
         <section>
             <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">
@@ -23,7 +25,7 @@ export default function PricingInventoryForm({ product }: Props) {
                         step="0.01"
                         min="0"
                         placeholder='0'
-                        defaultValue={product?.price ?? ''}
+                        defaultValue={formValues?.price ?? product?.price ?? ''}
                         className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-foreground"
                     />
                 </div>
@@ -44,7 +46,7 @@ export default function PricingInventoryForm({ product }: Props) {
                         min="0"
                         max="100"
                         placeholder='0'
-                        defaultValue={product?.discountPercentage ?? ''}
+                        defaultValue={formValues?.discountPercentage ?? product?.discountPercentage ?? ''}
                         className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-foreground"
                     />
                 </div>
@@ -64,7 +66,7 @@ export default function PricingInventoryForm({ product }: Props) {
                         step="1"
                         min="0"
                         placeholder='0'
-                        defaultValue={product?.stock ?? ''}
+                        defaultValue={formValues?.stock ?? product?.stock ?? ''}
                         className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-foreground"
                     />
                 </div>
@@ -84,7 +86,7 @@ export default function PricingInventoryForm({ product }: Props) {
                         step="1"
                         min="1"
                         placeholder='0'
-                        defaultValue={product?.minimumOrderQuantity ?? ''}
+                        defaultValue={formValues?.minimumOrderQuantity ?? product?.minimumOrderQuantity ?? ''}
                         className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-foreground"
                     />
                 </div>

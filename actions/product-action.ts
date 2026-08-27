@@ -5,6 +5,24 @@ import ProductService from '@/services/product-service';
 import type { Product } from '@/app/types';
 import { addProductSchema, editProduct } from '@/schemas/validation-schema';
 
+// Form values are kept as strings so submitted values can be restored after validation errors
+export type ProductFormValues = {
+  title: string;
+  description: string;
+  brand: string;
+  tags: string;
+  categoryId: string;
+  price: string;
+  discountPercentage: string;
+  stock: string;
+  minimumOrderQuantity: string;
+  thumbnail: string;
+  images: string;
+  height: string;
+  width: string;
+  depth: string;
+};
+
 export async function deleteProduct(productId: number) {
   const response = await ProductService.deleteProduct(productId);
 
@@ -52,9 +70,29 @@ function getProductFromFormData(formData: FormData): Partial<Product> {
   };
 }
 
+// Keep the submitted form values when validation fails
+function getFormValues(formData: FormData): ProductFormValues {
+  return {
+    title: String(formData.get('title') ?? ''),
+    description: String(formData.get('description') ?? ''),
+    brand: String(formData.get('brand') ?? ''),
+    tags: String(formData.get('tags') ?? ''),
+    categoryId: String(formData.get('categoryId') ?? '0'),
+    price: String(formData.get('price') ?? ''),
+    discountPercentage: String(formData.get('discountPercentage') ?? ''),
+    stock: String(formData.get('stock') ?? ''),
+    minimumOrderQuantity: String(formData.get('minimumOrderQuantity') ?? ''),
+    thumbnail: String(formData.get('thumbnail') ?? ''),
+    images: String(formData.get('images') ?? ''),
+    height: String(formData.get('height') ?? ''),
+    width: String(formData.get('width') ?? ''),
+    depth: String(formData.get('depth') ?? ''),
+  };
+}
+
 export async function updateProduct(
   productId: number,
-  _previousState: { success: boolean; message: string },
+  _previousState: { success: boolean; message: string; values?: ProductFormValues },
   formData: FormData
 ) {
   // Validate form data before sending it to the API
@@ -68,16 +106,18 @@ export async function updateProduct(
     discountPercentage: formData.get('discountPercentage'),
     stock: formData.get('stock'),
     minimumOrderQuantity: formData.get('minimumOrderQuantity'),
+    thumbnail: formData.get('thumbnail'),
     height: formData.get('height'),
     width: formData.get('width'),
     depth: formData.get('depth'),
   });
-  
+
   // Stop if the form data does not pass validation
   if (!validation.success) {
     return {
       success: false,
-      message: validation.error.issues[0].message,
+      message: validation.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join(', '),
+      values: getFormValues(formData),
     };
   }
 
@@ -101,28 +141,32 @@ export async function updateProduct(
 }
 
 export async function createProduct(
-  _previousState: { success: boolean; message: string },
+  _previousState: { success: boolean; message: string; values?: ProductFormValues },
   formData: FormData
 ) {
+  // Validate form data before sending it to the API
   const validation = addProductSchema.safeParse({
     title: formData.get('title'),
     description: formData.get('description'),
     brand: formData.get('brand'),
     tags: formData.get('tags'),
-    categoryId: formData.get('categoryId'),
+    categoryId: String(formData.get('categoryId') ?? '0'),
     price: formData.get('price'),
     discountPercentage: formData.get('discountPercentage'),
     stock: formData.get('stock'),
     minimumOrderQuantity: formData.get('minimumOrderQuantity'),
+    thumbnail: formData.get('thumbnail'),
     height: formData.get('height'),
     width: formData.get('width'),
     depth: formData.get('depth'),
   });
 
+  // Stop if the form data does not pass validation
   if (!validation.success) {
     return {
       success: false,
       message: validation.error.issues[0].message,
+      values: getFormValues(formData),
     };
   }
 

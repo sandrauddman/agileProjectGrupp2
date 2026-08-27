@@ -48,17 +48,16 @@ export default async function Home({ searchParams }: PageProps) {
         <InventoryStatistics />
 
         <SearchForm categories={categories} selectedCategory={categoryParams} selectedStock={stockParams} />
-        <section className="mt-5">
-          <ProductListComponent
-            products={products}
-            categories={categories}
-            categoryParam={categoryParams}
-            stockParam={stockParams}
-            queryParam={queryParams}
-            currentPage={currentPage}
-            totalPage={pages}
-          />
-        </section>
+
+        <ProductListComponent
+          products={products}
+          categories={categories}
+          categoryParam={categoryParams}
+          stockParam={stockParams}
+          queryParam={queryParams}
+          currentPage={currentPage}
+          totalPage={pages}
+        />
       </div>
     </main>
   );

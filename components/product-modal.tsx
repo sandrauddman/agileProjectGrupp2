@@ -66,12 +66,12 @@ export default function ProductModal({ mode, onClose, categories, product }: Pro
     }, [state, router, onClose]);
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/50">
+        <div className="fixed inset-0 flex items-start justify-center overflow-y-auto bg-black/50 px-4 py-6 md:items-center">
             <section
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="product-modal-title"
-                className="relative w-full max-w-4xl rounded-lg bg-background p-6 text-left shadow-xl"
+                className="relative max-h-[calc(100vh-2rem)] w-[calc(100%-2rem)] overflow-y-auto rounded-lg bg-background p-6 text-left shadow-xl sm:w-full sm:max-w-4xl"
             >
                 <button
                     type="button"

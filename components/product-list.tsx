@@ -26,10 +26,10 @@ export default function ProductList({ products, currentPage, totalPage, category
         <thead className="border-b border-gray-200 text-left bg-gray-100">
           <tr className="text-xs uppercase tracking-wide text-gray-500">
             <th className="px-6 py-4">Title</th>
-            <th className="px-6 py-4">Brand</th>
-            <th className="px-6 py-4">Category</th>
+            <th className="px-6 py-4 hidden md:table-cell">Brand</th>
+            <th className="px-6 py-4 hidden md:table-cell">Category</th>
             <th className="px-6 py-4">Stock</th>
-            <th className="px-6 py-4 text-right">Price</th>
+            <th className="px-6 py-4 text-right hidden md:table-cell">Price</th>
             <th className="px-6 py-4 text-center">Actions</th>
           </tr>
         </thead>
@@ -45,8 +45,8 @@ export default function ProductList({ products, currentPage, totalPage, category
                   </div>
                 </div>
               </td>
-              <td className="px-6 py-4 text-black">{product.brand}</td>
-              <td className="px-6 py-4 text-black">{product.category?.name}</td>
+              <td className="px-6 py-4 text-black hidden md:table-cell">{product.brand}</td>
+              <td className="px-6 py-4 text-black hidden md:table-cell">{product.category?.name}</td>
               <td className="px-6 py-4">
                 {(product.stock ?? 0) > 10 ? (
                   <span className="font-medium text-green-600">In Stock ({product.stock})</span>
@@ -56,11 +56,11 @@ export default function ProductList({ products, currentPage, totalPage, category
                   <span className="font-medium text-red-500">Out of Stock</span>
                 )}
               </td>
-              <td className="px-6 py-4 text-right text-black">€{product.price}</td>
+              <td className="px-6 py-4 text-right text-black hidden md:table-cell">€{product.price}</td>
 
               {/*Product Actions */}
               <td className="px-6 py-4 text-center text-black">
-                <div className="flex justify-center gap-4">
+                <div className="md:flex justify-center gap-4 grid">
                   {/*Delete Product */}
                   <ProductDeleteButton productId={product.id} deleteProduct={deleteProduct} />
 

@@ -9,7 +9,7 @@ type Props = {
 
 export default function SearchForm({ categories, selectedCategory, selectedStock }: Props) {
   return (
-    <form action="/" method="GET" className="bg-white border-1 border-zinc-200 rounded-sm flex p-4 gap-4 mt-6 text-sm">
+    <form action="/" method="GET" className="bg-white border-1 border-zinc-200 rounded-sm flex flex-wrap p-4 gap-4 mt-6 text-sm">
       <label htmlFor="search" hidden>
         Search
       </label>

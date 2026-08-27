@@ -38,6 +38,7 @@ export default async function Home({ searchParams }: PageProps) {
 
   const products = productResponse.success ? productResponse.data.products : [];
   const categories = categoryResponse.success ? categoryResponse.data.categories : [];
+  const pages = productResponse.success ? productResponse.data.pages : 0;
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -54,8 +55,8 @@ export default async function Home({ searchParams }: PageProps) {
             categoryParam={categoryParams}
             stockParam={stockParams}
             queryParam={queryParams}
-            currentPage={productResponse.success ? productResponse.data.page : currentPage}
-            totalPage={productResponse.success ? productResponse.data.pages : 0}
+            currentPage={currentPage}
+            totalPage={pages}
           />
         </section>
       </div>

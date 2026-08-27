@@ -76,3 +76,10 @@ export interface ApiErrorResponse {
   success: false;
   message: string;
 }
+
+export interface Stats  {
+    total: number,
+    inStock: number,
+    lowStock: number,
+    outOfStock: number
+}

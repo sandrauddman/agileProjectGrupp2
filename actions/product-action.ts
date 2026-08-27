@@ -132,8 +132,6 @@ export async function updateProduct(
     };
   }
 
-  revalidatePath('/');
-
   return {
     success: true,
     message: 'Product updated successfully',
@@ -180,8 +178,6 @@ export async function createProduct(
       message: 'Product could not be created',
     };
   }
-
-  revalidatePath('/');
 
   return {
     success: true,

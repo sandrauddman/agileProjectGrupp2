@@ -1,121 +1,142 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Inventory Management
 
-This project uses [json-server](https://github.com/typicode/json-server/tree/v0.17.4) to mock a backend API.
+Group 2 project for the Agile Methods course. A Next.js inventory catalogue where you can browse, search, filter, add, edit, and delete products against a mocked REST API.
 
-Data in the json for the server is from [dummyjson.com](https://dummyjson.com/docs/products) but modified to fit the needs of this project. Most of the endpoints mirrors those in that documentation.
+## Features
 
-## Getting Started
+- Product catalogue with pagination
+- Search plus filters for category and stock (in stock, low stock, out of stock)
+- Add / edit product in a modal (info, pricing, media)
+- Delete product
+- Inventory statistic cards
+- Loading spinner, custom 404, and custom error pages
+- Zod validation; form values are kept after a failed submit
+- Toast notifications (Sonner)
 
-First, install the dependencies:
+## Tech stack
+
+| Layer | Tool |
+| --- | --- |
+| App | Next.js 16 (App Router), React 19, TypeScript |
+| Styling | Tailwind CSS 4, lucide-react |
+| Validation | Zod |
+| Mock API | json-server 0.17 on port 4000 |
+| Tooling | ESLint, Prettier |
+
+## Getting started
+
+Requires **Node.js** (current LTS is fine).
 
 ```bash
 npm install
-# or
-yarn install
-# or
-pnpm install
-# or
-bun install
-```
-
-To start the full development environment (Next.js frontend + JSON Server backend), use:
-
-```bash
 npm run dev:full
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open:
 
-The JSON server is running on [http://localhost:4000](http://localhost:4000). Here you can see the API endpoints and test them.
+- App: [http://localhost:3000](http://localhost:3000)
+- API: [http://localhost:4000](http://localhost:4000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`dev:full` starts Next.js and json-server together. To run them separately:
 
-## JSON Server Setup
+```bash
+npm run dev          # Next.js only (port 3000)
+npm run mock-server  # json-server only (port 4000)
+```
 
-This project uses [json-server](https://github.com/typicode/json-server/tree/v0.17.4) to mock a backend API.
+If the UI loads but products are empty, the mock server is not running.
 
-### Configuration
+```bash
+npm run lint
+npm run build
+```
 
-The server configuration files are located in the `server/` directory:
+## Project structure
 
--   `server/products.json`: The database file containing the product data.
--   `server/middleware.js`: Custom middleware for the server.
+```
+app/            Pages, layout, loading, error, 404, types
+actions/        Server actions (create, update, delete)
+components/     UI (header, list, modal, forms, search, stats)
+services/       Fetch layer for products and categories
+schemas/        Zod validation
+server/         json-server data + middleware
+utils/          Shared helpers (error responses)
+```
 
-### Scripts
+Product data lives in `server/products.json` (based on [dummyjson](https://dummyjson.com/docs/products), adapted for this app). Custom behaviour is in `server/middleware.js`.
 
-The following scripts are available in `package.json`:
+## Git workflow
 
--   `npm run mock-server`: Starts the json-server on port 4000.
--   `npm run dev:full`: Runs both the Next.js development server and the json-server concurrently.
+`dev` is protected: **do not push to `dev`**. Work on a feature branch and open a pull request **into `dev`**.
 
-## API Endpoints
+```bash
+git checkout dev
+git pull origin dev
+git checkout -b feat-short-description
+# ...commit...
+git push -u origin feat-short-description
+```
 
-The mock server (running on port 4000) provides the following endpoints:
+On GitHub: **New pull request** → base **`dev`** → compare your branch.
+
+Commit style used in this repo:
+
+```
+feat: add custom error, 404, and global error pages
+fix: preserve product form values on validation failure
+```
+
+## Definition of done
+
+- Feature tested by 2 people on the PR branch
+- Acceptance criteria met
+- Code is finished and readable
+- TypeScript compiles with no errors
+- ESLint has no relevant errors
+- Works with the rest of the app
+- Merged into the shared `dev` branch
+- No known serious bugs
+- GitHub issue updated
+
+## Mock API (port 4000)
 
 ### Resources
-- `GET /products`: Get all products
-- `GET /products/:id`: Get a single product by ID
-- `GET /categories`: Get all categories
-- `GET /categories/:id`: Get a category by ID
-- `GET /categories?slug=:slug`: Get a category by slug
 
-### Create Product
-- `POST /products`: Create a new product
+- `GET /products` — all products
+- `GET /products/:id` — one product
+- `GET /categories` — all categories
+- `GET /categories/:id` — one category
+- `GET /categories?slug=:slug` — category by slug
+- `POST /products` — create
+- `PATCH /products/:id` — update
+- `DELETE /products/:id` — delete
 
-**Required Fields:**
-- `title`: String
-- `price`: Number
-- `description`: String
-- `thumbnail`: URL String
-- `categoryId`: Number (ID of an existing category)
-- `brand`: String
+**Create required fields:** `title`, `price`, `description`, `thumbnail`, `categoryId`, `brand`
 
-**Auto-generated Fields:**
-- `id`: Sequential ID
-- `sku`: Generated SKU (format: CAT-BRA-TIT-ID)
-- `meta`: Creation and update timestamps
+**Auto-generated:** `id`, `sku` (`CAT-BRA-TIT-ID`), `meta` timestamps
 
-### Pagination & Sorting (json-server 0.17.4)
-See [json-server documentation](https://github.com/typicode/json-server/tree/v0.17.4) for more information.
+### Pagination, sort, filter
 
-#### Pagination
-Use `_page` and `_limit` to paginate data:
-- `GET /products?_page=1&_limit=10` (First page, 10 items)
-- `GET /products?_page=2&_limit=10` (Second page, 10 items)
+```
+GET /products?_page=1&_limit=10
+GET /products?_sort=price&_order=asc
+GET /products?price_gte=10&price_lte=50
+GET /products?q=mascara
+```
 
-The response will include the `Link` header with `first`, `prev`, `next`, and `last` links.
-Our custom middleware also adds `X-Total-Count` header and wraps the response to include pagination metadata (total, limit, page, pages).
+Middleware adds `X-Total-Count` and wraps list responses with `total`, `limit`, `page`, and `pages`. See [json-server 0.17.4](https://github.com/typicode/json-server/tree/v0.17.4).
 
-#### Sorting
-Use `_sort` and `_order` to sort data:
-- `GET /products?_sort=price&_order=asc` (Sort by price, ascending)
-- `GET /products?_sort=price&_order=desc` (Sort by price, descending)
-- `GET /products?_sort=price,title&_order=desc,asc` (Sort by multiple fields)
+## Scripts
 
-#### Filtering
-- `GET /products?price_gte=10&price_lte=50` (Price between 10 and 50)
-- `GET /products?q=mascara` (Full-text search)
+| Command | What it does |
+| --- | --- |
+| `npm run dev:full` | Next.js + json-server |
+| `npm run dev` | Next.js only |
+| `npm run mock-server` | json-server only |
+| `npm run build` | Production build |
+| `npm start` | Serve production build |
+| `npm run lint` | ESLint |
 
-## Learn More
+## Course notes
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-
-## DOD -definition of done
-
-• funktionen är testad av 2 i gruppen på relevant branch vi PR-review.
-• acceptanskriterierna är uppfyllda
-• koden är färdig och begriplig
-• TypeScript kompilerar utan fel
-• ESLint har inga relevanta fel
-• den fungerar tillsammans med resten av appen
-• den är mergad till gruppens gemensamma dev branch
-• inga kända allvarliga fel återstår
-• GitHub-issuet är uppdaterat
-
-
-
-
+This is course start code (`projekt-agila-metoder-startkod`) extended by the group. Sprint notes live in `GroupRetrospective.md`.

@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect } from 'react';
 import { useFormStatus } from 'react-dom';
+import { useRouter } from 'next/navigation';
 
 import ProductInfoForm from './forms/product-info-form';
 import { Category, Product } from '@/app/types';
@@ -34,6 +35,7 @@ function SaveProductButton() {
 }
 
 export default function ProductModal({ mode, onClose, categories, product }: ProductModalProps) {
+    const router = useRouter();
     const title = mode === 'add' ? 'Add Product' : 'Edit Product';
 
     // choose the server action based on whether the modal is adding or editing a product
@@ -55,11 +57,13 @@ export default function ProductModal({ mode, onClose, categories, product }: Pro
 
         if (state.success) {
             toast.success(state.message);
+            // Refresh to show the saved product in product list
+            router.refresh();
             onClose();
         } else {
             toast.error(state.message);
         }
-    }, [state, onClose]);
+    }, [state, router, onClose]);
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black/50">

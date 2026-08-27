@@ -62,7 +62,7 @@ export default function ProductModal({ mode, onClose, categories, product }: Pro
     }, [state, onClose]);
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center overflow-y-auto bg-black/50 p-4">
+        <div className="fixed inset-0 flex items-start justify-center overflow-y-auto bg-black/50 px-4 py-6 md:items-center">
             <section
                 role="dialog"
                 aria-modal="true"

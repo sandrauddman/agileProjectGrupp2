@@ -13,14 +13,12 @@ export default function Header({ categories }: Props) {
   //Controls whether the product modal is open
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
-    <div>
+    <>
       <header className="border-b border-gray-300 bg-background">
         <div className="container mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
           <div>
             <h1 className="text-xl font-extrabold text-foreground">Inventory Management</h1>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              Manage and track your global product catalogue across all categories
-            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Manage and track your global product catalogue across all categories</p>
           </div>
 
           <button
@@ -36,9 +34,7 @@ export default function Header({ categories }: Props) {
       </header>
 
       {/* Display product modal when open */}
-      {isModalOpen && (
-        <ProductModal categories={categories} mode="add" onClose={() => setIsModalOpen(false)} />
-      )}
-    </div>
+      {isModalOpen && <ProductModal aria-expanded={isModalOpen} categories={categories} mode="add" onClose={() => setIsModalOpen(false)} />}
+    </>
   );
 }

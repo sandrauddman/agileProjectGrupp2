@@ -2,7 +2,7 @@ import { ApiResponse, ApiSuccessResponse, ProductsResponse, Stats } from "@/app/
 import { errorResponse } from "@/utils/error-response";
 
 
-const API_URL = 'http://localhost:4000';
+const API_URL = process.env.API_URL ?? 'http://localhost:4000';
 
 export default class StockService {
 

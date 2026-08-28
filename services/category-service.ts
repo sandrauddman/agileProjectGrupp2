@@ -1,7 +1,7 @@
 import { ApiResponse, ApiSuccessResponse, CategoryResponse } from '@/app/types';
 import { errorResponse } from '@/utils/error-response';
 
-const API_URL = 'http://localhost:4000';
+const API_URL = process.env.API_URL ?? 'http://localhost:4000';
 
 export default class CategoryService {
   static async getAllCategories(): Promise<ApiResponse<CategoryResponse>> {

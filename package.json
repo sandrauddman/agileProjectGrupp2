@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "mock-server": "json-server --watch server/products.json --middlewares server/middleware.js --port 4000",
+    "start:api": "json-server --watch server/products.json --middlewares server/middleware.js --host 0.0.0.0 --port $PORT",
     "dev:full": "concurrently \"npm run dev\" \"npm run mock-server\"",
     "build": "next build",
     "start": "next start",
